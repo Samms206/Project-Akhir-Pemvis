@@ -164,14 +164,11 @@ public class Login extends javax.swing.JFrame {
                 if (rs.next()) {
                 int role = rs.getInt("role");
                 if (role == 1) {
-                    // Redirect to Admin Page
                     JOptionPane.showMessageDialog(this, "Login Berhasil sebagai Admin", "Login", JOptionPane.DEFAULT_OPTION);
-                    // Ganti MainAdmin dengan nama kelas halaman admin
                     Admin adminPage = new Admin();
                     adminPage.setVisible(true);
                     this.dispose();
                 } else if (role == 2) {
-                    // Redirect to User Page
                     JOptionPane.showMessageDialog(this, "Login Berhasil sebagai User", "Login", JOptionPane.DEFAULT_OPTION);
                     Main userPage = new Main(username, password);
                     userPage.setVisible(true);

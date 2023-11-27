@@ -16,9 +16,16 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import projectakhir.FrontView;
 
 /**
@@ -120,8 +127,6 @@ public final class Main extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_datapinjamhistory = new javax.swing.JTable();
-        tf_caripeminjaman = new javax.swing.JTextField();
-        btn_caripinjam = new javax.swing.JButton();
         btn_kembalikan = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         btn_batalmengembalikan = new javax.swing.JButton();
@@ -130,6 +135,10 @@ public final class Main extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         tf_transaksidipilih = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        tf_idcetak = new javax.swing.JTextField();
+        btn_cetak = new javax.swing.JButton();
+        btn_batalcetak = new javax.swing.JButton();
         perpanjangan_pane = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -423,20 +432,14 @@ public final class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_datapinjamhistory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_datapinjamhistoryMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbl_datapinjamhistory);
 
         pengembalian_pane.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 710, 190));
-        pengembalian_pane.add(tf_caripeminjaman, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 250, -1));
-
-        btn_caripinjam.setBackground(new java.awt.Color(255, 255, 255));
-        btn_caripinjam.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-        btn_caripinjam.setText("cari");
-        btn_caripinjam.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_caripinjamActionPerformed(evt);
-            }
-        });
-        pengembalian_pane.add(btn_caripinjam, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, 80, -1));
 
         btn_kembalikan.setBackground(new java.awt.Color(255, 255, 255));
         btn_kembalikan.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
@@ -495,6 +498,35 @@ public final class Main extends javax.swing.JFrame {
         tf_transaksidipilih.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
         tf_transaksidipilih.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pengembalian_pane.add(tf_transaksidipilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 110, 40, 40));
+
+        jLabel22.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel22.setText("ID Transaksi");
+        pengembalian_pane.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 370, 120, -1));
+
+        tf_idcetak.setEditable(false);
+        tf_idcetak.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        tf_idcetak.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        pengembalian_pane.add(tf_idcetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 360, 40, 40));
+
+        btn_cetak.setBackground(new java.awt.Color(255, 255, 255));
+        btn_cetak.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        btn_cetak.setText("Cetak");
+        btn_cetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cetakActionPerformed(evt);
+            }
+        });
+        pengembalian_pane.add(btn_cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, 100, 40));
+
+        btn_batalcetak.setBackground(new java.awt.Color(255, 255, 255));
+        btn_batalcetak.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        btn_batalcetak.setText("Batal");
+        btn_batalcetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_batalcetakActionPerformed(evt);
+            }
+        });
+        pengembalian_pane.add(btn_batalcetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 100, 40));
 
         rightPane.add(pengembalian_pane, "card5");
 
@@ -583,20 +615,21 @@ public final class Main extends javax.swing.JFrame {
 
     void show_history_datapeminjaman(){
         Object[] kolom = {
-            "Buku", "Qty", "Tgl Pinjam", "Tgl Tenggat", "Tgl Kembali", "Denda", "Status"
+            "ID","Buku", "Qty", "Tgl Pinjam", "Tgl Tenggat", "Tgl Kembali", "Denda", "Status"
         };
         modelhistory = new DefaultTableModel(null, kolom);
         tbl_datapinjamhistory.setModel(modelhistory);
         try {
           st = conn.createStatement();
           rs = st.executeQuery("SELECT "
-                  + "buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat, transaksi.tgl_kembali, transaksi.denda, transaksi.status "
+                  + "transaksi.id_trans, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat, transaksi.tgl_kembali, transaksi.denda, transaksi.status "
                   + "FROM `transaksi`, `buku`, `user` "
                   + "WHERE user.id_user = transaksi.id_user "
                   + "AND buku.id_buku = transaksi.id_buku "
                   + "AND transaksi.id_user = '"+id_user+"'");
           while (rs.next()) {
             Object[] data = {
+              rs.getString("id_trans"),
               rs.getString("namabuku"),
               rs.getString("qty"),
               rs.getString("tgl_pinjam"),
@@ -711,6 +744,7 @@ public final class Main extends javax.swing.JFrame {
         btn_pinjam.setEnabled(false);
         btn_kembalikan.setEnabled(false);
         btn_perpanjang.setEnabled(false);
+        btn_cetak.setEnabled(false);
     }
     void enable_true(){
         tf_email.setEnabled(true);
@@ -977,10 +1011,6 @@ public final class Main extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btn_cariActionPerformed
 
-    private void btn_caripinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_caripinjamActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_caripinjamActionPerformed
-
     void dendaPinjam(){
         denda = 0;
         selisihTenggat = 0;
@@ -1128,6 +1158,36 @@ public final class Main extends javax.swing.JFrame {
             tf_transaksidipilih1.setText(id_trans);
         }
     }//GEN-LAST:event_tbl_datapinjam1MouseClicked
+
+    private void btn_cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cetakActionPerformed
+        // TODO add your handling code here:
+        try {
+            String path = "/Users/macbookpro/NetBeansProjects/ProjectAkhir/src/Report/nota_peminjaman.jrxml";
+            HashMap hash = new HashMap();
+            hash.put("kode", tf_idcetak.getText());
+            JasperReport jrpt = JasperCompileManager.compileReport(path);
+            JasperPrint jprint = JasperFillManager.fillReport(jrpt, hash, conn);
+            JasperViewer.viewReport(jprint, false);
+        } catch (JRException e) {
+            System.out.println("error : " + e.getMessage());
+        }
+    }//GEN-LAST:event_btn_cetakActionPerformed
+
+    private void tbl_datapinjamhistoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_datapinjamhistoryMouseClicked
+        // TODO add your handling code here:
+        btn_cetak.setEnabled(true);
+        int selectedRow = tbl_datapinjamhistory.getSelectedRow();
+        if (selectedRow != -1) {
+            String id = tbl_datapinjamhistory.getValueAt(selectedRow, 0).toString();
+            tf_idcetak.setText(id);
+        }
+    }//GEN-LAST:event_tbl_datapinjamhistoryMouseClicked
+
+    private void btn_batalcetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batalcetakActionPerformed
+        // TODO add your handling code here:
+        btn_cetak.setEnabled(false);
+        tf_idcetak.setText("");
+    }//GEN-LAST:event_btn_batalcetakActionPerformed
     public void frontCondition(){
         btnLogout.setForeground(Color.WHITE);
         btnPerpanjangan.setForeground(Color.WHITE);
@@ -1177,11 +1237,12 @@ public final class Main extends javax.swing.JFrame {
     private javax.swing.JLabel btnPerpanjangan;
     private javax.swing.JLabel btnProfile;
     private javax.swing.JButton btn_batal;
+    private javax.swing.JButton btn_batalcetak;
     private javax.swing.JButton btn_batalmengembalikan;
     private javax.swing.JButton btn_batalperpanjangan;
     private javax.swing.JButton btn_batalpinjam;
     private javax.swing.JButton btn_cari;
-    private javax.swing.JButton btn_caripinjam;
+    private javax.swing.JButton btn_cetak;
     private javax.swing.JButton btn_kembalikan;
     private javax.swing.JButton btn_perpanjang;
     private javax.swing.JButton btn_pinjam;
@@ -1204,6 +1265,7 @@ public final class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1226,8 +1288,8 @@ public final class Main extends javax.swing.JFrame {
     private javax.swing.JTable tbl_datapinjam1;
     private javax.swing.JTable tbl_datapinjamhistory;
     private javax.swing.JTextField tf_caribuku;
-    private javax.swing.JTextField tf_caripeminjaman;
     private javax.swing.JTextField tf_email;
+    private javax.swing.JTextField tf_idcetak;
     private javax.swing.JTextField tf_jumlah;
     private javax.swing.JTextField tf_kodebuku;
     private javax.swing.JPasswordField tf_konfirmpassword;

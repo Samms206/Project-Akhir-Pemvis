@@ -43,8 +43,59 @@ public class Admin extends javax.swing.JFrame {
     public Admin() {
         initComponents();
         warna();
+        show_buku();
+        show_user();
     }
 
+    void show_buku(){
+        Object[] kolom = {
+            "ID", "Buku", "Stok", "Penulis", "Penerbit"
+        };
+        model_buku = new DefaultTableModel(null, kolom);
+        tabel_buku.setModel(model_buku);
+        try {
+          st = conn.createStatement();
+          rs = st.executeQuery("SELECT * FROM buku");
+          while (rs.next()) {
+            Object[] data = {
+              rs.getString("id_buku"),
+              rs.getString("namabuku"),
+              rs.getString("stok"),
+              rs.getString("penulis"),
+              rs.getString("penerbit")
+            };
+              model_buku.addRow(data);
+          }
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    void show_user(){
+        Object[] kolom = {
+            "ID", "Nama", "NIM", "Email", "No HP", "Password", "Role"
+        };
+        model_anggota = new DefaultTableModel(null, kolom);
+        table_anggota.setModel(model_anggota);
+        try {
+          st = conn.createStatement();
+          rs = st.executeQuery("SELECT * FROM user");
+          while (rs.next()) {
+            Object[] data = {
+              rs.getString("id_user"),
+              rs.getString("username"),
+              rs.getString("nim"),
+              rs.getString("email"),
+              rs.getString("nohp"),
+              rs.getString("password"),
+              rs.getString("role")
+            };
+              model_anggota.addRow(data);
+          }
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,6 +151,8 @@ public class Admin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         Daftarbuku = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabel_buku = new javax.swing.JTable();
@@ -286,7 +339,7 @@ public class Admin extends javax.swing.JFrame {
         Profilepane.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 190, 40));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel15.setText("Ulangi Pass");
+        jLabel15.setText("Ulangi Password");
         Profilepane.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -300,15 +353,15 @@ public class Admin extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel17.setText("Password");
         Profilepane.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
-        Profilepane.add(tf_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 600, 30));
-        Profilepane.add(tf_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 600, 30));
+        Profilepane.add(tf_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 570, 30));
+        Profilepane.add(tf_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 570, 30));
 
         tf_pass2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_pass2ActionPerformed(evt);
             }
         });
-        Profilepane.add(tf_pass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 600, 30));
+        Profilepane.add(tf_pass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 570, 30));
 
         btn_ubah.setBackground(new java.awt.Color(255, 255, 255));
         btn_ubah.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -359,7 +412,7 @@ public class Admin extends javax.swing.JFrame {
                 tf_passActionPerformed(evt);
             }
         });
-        Profilepane.add(tf_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 600, 30));
+        Profilepane.add(tf_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 570, 30));
         Profilepane.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         kananpane.add(Profilepane, "card3");
@@ -427,7 +480,7 @@ public class Admin extends javax.swing.JFrame {
         });
         Anggotapane.add(noHP_anggota, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, 270, 30));
 
-        jLabel23.setText("Kelas");
+        jLabel23.setText("NIM");
         Anggotapane.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 345, 50, -1));
 
         jToggleButton1.setBackground(new java.awt.Color(255, 255, 255));
@@ -445,7 +498,7 @@ public class Admin extends javax.swing.JFrame {
                 jToggleButton1ActionPerformed(evt);
             }
         });
-        Anggotapane.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 390, 90, 40));
+        Anggotapane.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 420, 90, 40));
 
         jToggleButton3.setBackground(new java.awt.Color(255, 255, 255));
         jToggleButton3.setText("cetak");
@@ -454,7 +507,7 @@ public class Admin extends javax.swing.JFrame {
                 jToggleButton3ActionPerformed(evt);
             }
         });
-        Anggotapane.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 390, -1, 40));
+        Anggotapane.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 420, -1, 40));
 
         jToggleButton4.setBackground(new java.awt.Color(255, 255, 255));
         jToggleButton4.setText("ubah");
@@ -471,7 +524,7 @@ public class Admin extends javax.swing.JFrame {
                 jToggleButton4ActionPerformed(evt);
             }
         });
-        Anggotapane.add(jToggleButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 390, -1, 40));
+        Anggotapane.add(jToggleButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 420, -1, 40));
 
         jToggleButton9.setBackground(new java.awt.Color(255, 255, 255));
         jToggleButton9.setText("tambah");
@@ -488,7 +541,7 @@ public class Admin extends javax.swing.JFrame {
                 jToggleButton9ActionPerformed(evt);
             }
         });
-        Anggotapane.add(jToggleButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 390, 100, 40));
+        Anggotapane.add(jToggleButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 420, 100, 40));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -504,6 +557,12 @@ public class Admin extends javax.swing.JFrame {
         jLabel13.setText("Anggota_____");
         Anggotapane.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 190, 40));
         Anggotapane.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel31.setText("Role");
+        Anggotapane.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 50, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--pilh role--", "User", "Admin" }));
+        Anggotapane.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, 270, -1));
 
         kananpane.add(Anggotapane, "card4");
 
@@ -549,7 +608,7 @@ public class Admin extends javax.swing.JFrame {
         jLabel25.setText("Nama");
         Daftarbuku.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 185, -1, -1));
 
-        jLabel26.setText("Pengarang");
+        jLabel26.setText("Penulis");
         Daftarbuku.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 225, -1, -1));
 
         jLabel27.setText("Penerbit");
@@ -786,7 +845,7 @@ public class Admin extends javax.swing.JFrame {
         jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 730, 430));
 
         jTextField15.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField15.setText("Cari Data Peminjam (nama atau kelas)");
+        jTextField15.setText("Cari Data Pengembalian (nama, nim atau tanggal)");
         jTextField15.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField15MouseClicked(evt);
@@ -861,7 +920,7 @@ public class Admin extends javax.swing.JFrame {
         jPanel2.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 730, 430));
 
         jTextField16.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField16.setText("Cari Data Pengembalian (nama atau kelas)");
+        jTextField16.setText("Cari Data Pengembalian (nama, nim atau tanggal)");
         jTextField16.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField16MouseClicked(evt);
@@ -1806,6 +1865,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel input;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1829,6 +1889,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
