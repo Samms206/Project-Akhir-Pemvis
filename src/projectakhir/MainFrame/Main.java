@@ -1057,8 +1057,22 @@ public final class Main extends javax.swing.JFrame {
 
     private void btn_perpanjangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_perpanjangActionPerformed
         // TODO add your handling code here:
-        if (rootPaneCheckingEnabled) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date dateTenggat = sdf.parse(tgl_tenggat);
+            Date dateKembali = sdf.parse(tglhari_ini);
+            long selisihMillis = dateKembali.getTime() - dateTenggat.getTime();
+            long selisihHari = TimeUnit.DAYS.convert(selisihMillis, TimeUnit.MILLISECONDS);
+
+            System.out.println("selisih " + selisihHari);
+            if (selisihHari >= -2) {
+                JOptionPane.showMessageDialog(this, "Dapat melakukan perpanjangan");
+            }else{
+                JOptionPane.showMessageDialog(this, "Tidak dapat melakukan Perpanjangan \nSebelum H-2 Tenggat");
+            }
             
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btn_perpanjangActionPerformed
 
