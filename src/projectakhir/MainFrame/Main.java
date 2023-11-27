@@ -1058,6 +1058,13 @@ public final class Main extends javax.swing.JFrame {
     private void btn_perpanjangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_perpanjangActionPerformed
         // TODO add your handling code here:
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //
+        LocalDate currentDate = LocalDate.now();
+        LocalDate futureDate = currentDate.plusDays(10);
+        // Format the date using DateTimeFormatter
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedFutureDate = futureDate.format(formatter);
+
         try {
             Date dateTenggat = sdf.parse(tgl_tenggat);
             Date dateKembali = sdf.parse(tglhari_ini);
@@ -1065,8 +1072,29 @@ public final class Main extends javax.swing.JFrame {
             long selisihHari = TimeUnit.DAYS.convert(selisihMillis, TimeUnit.MILLISECONDS);
 
             System.out.println("selisih " + selisihHari);
-            if (selisihHari >= -2) {
-                JOptionPane.showMessageDialog(this, "Dapat melakukan perpanjangan");
+            if (selisihHari >= -2 && selisihHari <= 0) {
+                try {
+                    String query = "INSERT INTO perpanjangan(id_trans,tgl_perpanjangan,tgl_tenggat) "
+                            + "VALUES(?,?,?)";
+                    ps = conn.prepareStatement(query);
+                    ps.setString(1, id_trans);
+                    ps.setString(2, tglhari_ini);
+                    ps.setString(3, formattedFutureDate);
+                    ps.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "berhasil mengembalikan buku");
+                    show_datapeminjaman();
+                    show_history_datapeminjaman();
+                    //clear
+                    tf_transaksidipilih1.setText("");
+                    tgl_tenggat = "00-00-0000";
+                    id_trans = "0";
+                    btn_perpanjang.setEnabled(false);
+                    enable_false();
+                }catch(SQLException e){
+                    JOptionPane.showMessageDialog(this, "Eror "+e.getMessage());
+                }
+            }else if(selisihHari > 0){
+                JOptionPane.showMessageDialog(this, "Tidak dapat melakukan perpanjangan\nKarena Sudah melebihi Tanggal tenggatn");
             }else{
                 JOptionPane.showMessageDialog(this, "Tidak dapat melakukan Perpanjangan \nSebelum H-2 Tenggat");
             }
@@ -1106,7 +1134,6 @@ public final class Main extends javax.swing.JFrame {
         btnProfile.setForeground(Color.WHITE);
         btnpeminjaman.setForeground(Color.WHITE);
         btnPengembalian.setForeground(Color.WHITE);
-
     }
     /**
      * @param args the command line arguments
