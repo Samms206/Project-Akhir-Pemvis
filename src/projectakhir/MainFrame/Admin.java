@@ -43,10 +43,13 @@ public class Admin extends javax.swing.JFrame {
     public Admin() {
         initComponents();
         warna();
+        refresh();
+    }
+    
+    void refresh(){
         show_buku();
         show_user();
     }
-
     void show_buku(){
         Object[] kolom = {
             "ID", "Buku", "Stok", "Penulis", "Penerbit"
@@ -138,21 +141,21 @@ public class Admin extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        kelas_anggota = new javax.swing.JTextField();
-        nama_angoota = new javax.swing.JTextField();
-        email_anggota = new javax.swing.JTextField();
-        pass_anggota = new javax.swing.JTextField();
-        noHP_anggota = new javax.swing.JTextField();
+        tf_nimUser = new javax.swing.JTextField();
+        tf_namaUser = new javax.swing.JTextField();
+        tf_emailUser = new javax.swing.JTextField();
+        tf_passUser = new javax.swing.JTextField();
+        tf_nohpUser = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
         jToggleButton4 = new javax.swing.JToggleButton();
-        jToggleButton9 = new javax.swing.JToggleButton();
+        btn_tambahUser = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmb_role = new javax.swing.JComboBox<>();
         Daftarbuku = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabel_buku = new javax.swing.JTable();
@@ -465,26 +468,26 @@ public class Admin extends javax.swing.JFrame {
 
         jLabel22.setText("NoHP");
         Anggotapane.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 305, 50, -1));
-        Anggotapane.add(kelas_anggota, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 270, 30));
-        Anggotapane.add(nama_angoota, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 270, 30));
-        Anggotapane.add(email_anggota, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 270, 30));
-        Anggotapane.add(pass_anggota, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, 270, 30));
+        Anggotapane.add(tf_nimUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 270, 30));
+        Anggotapane.add(tf_namaUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 270, 30));
+        Anggotapane.add(tf_emailUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 270, 30));
+        Anggotapane.add(tf_passUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, 270, 30));
 
-        noHP_anggota.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                noHP_anggotaKeyReleased(evt);
-            }
+        tf_nohpUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                noHP_anggotaKeyTyped(evt);
+                tf_nohpUserKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_nohpUserKeyReleased(evt);
             }
         });
-        Anggotapane.add(noHP_anggota, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, 270, 30));
+        Anggotapane.add(tf_nohpUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, 270, 30));
 
         jLabel23.setText("NIM");
         Anggotapane.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 345, 50, -1));
 
         jToggleButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jToggleButton1.setText("hapus");
+        jToggleButton1.setText("Hapus");
         jToggleButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jToggleButton1MousePressed(evt);
@@ -510,7 +513,7 @@ public class Admin extends javax.swing.JFrame {
         Anggotapane.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 420, -1, 40));
 
         jToggleButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jToggleButton4.setText("ubah");
+        jToggleButton4.setText("Ubah");
         jToggleButton4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jToggleButton4MousePressed(evt);
@@ -526,22 +529,22 @@ public class Admin extends javax.swing.JFrame {
         });
         Anggotapane.add(jToggleButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 420, -1, 40));
 
-        jToggleButton9.setBackground(new java.awt.Color(255, 255, 255));
-        jToggleButton9.setText("tambah");
-        jToggleButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_tambahUser.setBackground(new java.awt.Color(255, 255, 255));
+        btn_tambahUser.setText("Tambah");
+        btn_tambahUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jToggleButton9MousePressed(evt);
+                btn_tambahUserMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jToggleButton9MouseReleased(evt);
+                btn_tambahUserMouseReleased(evt);
             }
         });
-        jToggleButton9.addActionListener(new java.awt.event.ActionListener() {
+        btn_tambahUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton9ActionPerformed(evt);
+                btn_tambahUserActionPerformed(evt);
             }
         });
-        Anggotapane.add(jToggleButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 420, 100, 40));
+        Anggotapane.add(btn_tambahUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 420, 100, 40));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -561,8 +564,8 @@ public class Admin extends javax.swing.JFrame {
         jLabel31.setText("Role");
         Anggotapane.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 50, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--pilh role--", "User", "Admin" }));
-        Anggotapane.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, 270, -1));
+        cmb_role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--pilh role--", "User", "Admin" }));
+        Anggotapane.add(cmb_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, 270, -1));
 
         kananpane.add(Anggotapane, "card4");
 
@@ -1193,13 +1196,17 @@ public class Admin extends javax.swing.JFrame {
             TableModel model = table_anggota.getModel();
             //menampilkan data dari table ke texfield, jlabel dll
             id_user = model.getValueAt(row, 0).toString();
-            nama_angoota.setText(model.getValueAt(row, 1).toString());
-            kelas_anggota.setText(model.getValueAt(row, 2).toString());
-            email_anggota.setText(model.getValueAt(row, 3).toString());
-            pass_anggota.setText(model.getValueAt(row, 4).toString());
-            noHP_anggota.setText(model.getValueAt(row, 5).toString());
-            //khusus gambar
-            String tabel_click = (table_anggota.getModel().getValueAt(row, 0)).toString();
+            tf_namaUser.setText(model.getValueAt(row, 1).toString());
+            tf_nimUser.setText(model.getValueAt(row, 2).toString());
+            tf_emailUser.setText(model.getValueAt(row, 3).toString());
+            tf_nohpUser.setText(model.getValueAt(row, 4).toString());
+            tf_passUser.setText(model.getValueAt(row, 5).toString());
+            String role = model.getValueAt(row, 6).toString();
+            if (role.equals("1")) {
+                cmb_role.setSelectedIndex(2);
+            }else{
+                cmb_role.setSelectedIndex(1);
+            }
 
         } catch (Exception e) {
         }
@@ -1240,22 +1247,22 @@ public class Admin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTextField1KeyReleased
 
-    private void noHP_anggotaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_noHP_anggotaKeyReleased
+    private void tf_nohpUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_nohpUserKeyReleased
         // TODO add your handling code here:
 
-        if (noHP_anggota.getText().length()>= 14) {
+        if (tf_nohpUser.getText().length()>= 14) {
             JOptionPane.showMessageDialog(this, "karakter terlalu panjang!!");
         }
 
-    }//GEN-LAST:event_noHP_anggotaKeyReleased
+    }//GEN-LAST:event_tf_nohpUserKeyReleased
 
-    private void noHP_anggotaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_noHP_anggotaKeyTyped
+    private void tf_nohpUserKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_nohpUserKeyTyped
         // TODO add your handling code here:
         char enter=evt.getKeyChar();
         if(!(Character.isDigit(enter))){
             evt.consume();
         }
-    }//GEN-LAST:event_noHP_anggotaKeyTyped
+    }//GEN-LAST:event_tf_nohpUserKeyTyped
 
     private void jToggleButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton1MousePressed
         // TODO add your handling code here:
@@ -1273,20 +1280,21 @@ public class Admin extends javax.swing.JFrame {
             int opsi = JOptionPane.showConfirmDialog(null, "Benarkah anda ingin menghapus data ini ?");
             switch(opsi){
                 case JOptionPane.YES_OPTION:
-                String sql = "delete from registrasi where id ='"+id_user ;
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
-                break;
+                    String sql = "DELETE FROM user WHERE id_user ="+id_user ;
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
+                    break;
                 case JOptionPane.NO_OPTION:
-                break;
+                    break;
                 default:
-                break;
+                    break;
             }
-            model_anggota.setRowCount(0);
+            refresh();
 //            bersih();
 //            dataanggota();
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -1318,79 +1326,92 @@ public class Admin extends javax.swing.JFrame {
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
         // TODO add your handling code here:
-        if (email_anggota.getText().length() == 0) {
+        if (tf_emailUser.getText().length() == 0) {
             JOptionPane.showMessageDialog(this, "email masih kosong!!");
-        }else if(nama_angoota.getText().length() == 0){
+        }else if(tf_namaUser.getText().length() == 0){
             JOptionPane.showMessageDialog(this, "nama masih kosong!!");
-        }else if(noHP_anggota.getText().length() == 0){
+        }else if(tf_nohpUser.getText().length() == 0){
             JOptionPane.showMessageDialog(this, "No HP masih kosong!!");
-        }else if(pass_anggota.getText().length() == 0){
+        }else if(tf_passUser.getText().length() == 0){
             JOptionPane.showMessageDialog(this, "Password masih kosong!!");
-        }else if(kelas_anggota.getText().length() == 0){
+        }else if(tf_nimUser.getText().length() == 0){
             JOptionPane.showMessageDialog(this, "Kelas masih kosong!!");
         }else{
             try {
-                String sql = "UPDATE registrasi SET email=?, nama=?, password=?, noHP=?, kelas=?, gambar=? WHERE id=?";
+                String sql = "UPDATE user SET "
+                        + "username=?,nim=?,email=?,nohp=?,password=?,role=? "
+                        + "WHERE id_user=?";
                 PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, email_anggota.getText());
-                ps.setString(2, nama_angoota.getText());
-                ps.setString(3, pass_anggota.getText());
-                ps.setString(4, noHP_anggota.getText());
-                ps.setString(5, kelas_anggota.getText());
-
+                ps.setString(1, tf_namaUser.getText());
+                ps.setString(2, tf_nimUser.getText());
+                ps.setString(3, tf_emailUser.getText());
+                ps.setString(4, tf_nohpUser.getText());
+                ps.setString(5, tf_passUser.getText());
+                String role = "1";
+                String pil = cmb_role.getSelectedItem().toString();
+                if ("User".equals(pil)) {
+                    role = "2";
+                }
+                ps.setString(6, role);
                 ps.setString(7, id_user);
                 ps.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Berhasil Mengubah Data Anggota");
-                model_anggota.setRowCount(0);
+                JOptionPane.showMessageDialog(this, "Berhasil Mengupdate data User");
+                refresh();
 //                bersih();
 //                dataanggota();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Gagal Menambahkan Anggota "+e);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Gagal Mengupdate data User"+e.getMessage());
             }
         }
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
-    private void jToggleButton9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton9MousePressed
+    private void btn_tambahUserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tambahUserMousePressed
         // TODO add your handling code here:
         btn_ubah.setBackground(Color.white);
-    }//GEN-LAST:event_jToggleButton9MousePressed
+    }//GEN-LAST:event_btn_tambahUserMousePressed
 
-    private void jToggleButton9MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton9MouseReleased
+    private void btn_tambahUserMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tambahUserMouseReleased
         // TODO add your handling code here:
         btn_ubah.setBackground(Color.white);
-    }//GEN-LAST:event_jToggleButton9MouseReleased
+    }//GEN-LAST:event_btn_tambahUserMouseReleased
 
-    private void jToggleButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton9ActionPerformed
+    private void btn_tambahUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahUserActionPerformed
         // TODO add your handling code here:
-        if (email_anggota.getText().length() == 0) {
+        if (tf_emailUser.getText().length() == 0) {
             JOptionPane.showMessageDialog(this, "email masih kosong!!");
-        }else if(nama_angoota.getText().length() == 0){
+        }else if(tf_namaUser.getText().length() == 0){
             JOptionPane.showMessageDialog(this, "nama masih kosong!!");
-        }else if(noHP_anggota.getText().length() == 0){
+        }else if(tf_nohpUser.getText().length() == 0){
             JOptionPane.showMessageDialog(this, "No HP masih kosong!!");
-        }else if(pass_anggota.getText().length() == 0){
+        }else if(tf_passUser.getText().length() == 0){
             JOptionPane.showMessageDialog(this, "Password masih kosong!!");
-        }else if(kelas_anggota.getText().length() == 0){
+        }else if(tf_nimUser.getText().length() == 0){
             JOptionPane.showMessageDialog(this, "Kelas masih kosong!!");
         }else{
             try {
-                String sql = "INSERT INTO registrasi(email,nama,password,noHP,kelas,gambar) values (?,?,?,?,?,?)";
+                String sql = "INSERT INTO user(username,nim,email,nohp,password,role) values (?,?,?,?,?,?)";
                 PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, email_anggota.getText());
-                ps.setString(2, nama_angoota.getText());
-                ps.setString(3, pass_anggota.getText());
-                ps.setString(4, noHP_anggota.getText());
-                ps.setString(5, kelas_anggota.getText());
+                ps.setString(1, tf_namaUser.getText());
+                ps.setString(2, tf_nimUser.getText());
+                ps.setString(3, tf_emailUser.getText());
+                ps.setString(4, tf_nohpUser.getText());
+                ps.setString(5, tf_passUser.getText());
+                String role = "1";
+                String pil = cmb_role.getSelectedItem().toString();
+                if ("User".equals(pil)) {
+                    role = "2";
+                }
+                ps.setString(6, role);
                 ps.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Berhasil Menambahkan Anggota");
-                model_anggota.setRowCount(0);
+                JOptionPane.showMessageDialog(this, "Berhasil Menambahkan User");
+                refresh();
 //                bersih();
 //                dataanggota();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Gagal Menambahkan Anggota "+e);
+                JOptionPane.showMessageDialog(this, "Gagal Menambahkan User "+e.getMessage());
             }
         }
-    }//GEN-LAST:event_jToggleButton9ActionPerformed
+    }//GEN-LAST:event_btn_tambahUserActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -1854,9 +1875,10 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel btnLogout;
     private javax.swing.JLabel btnProfile1;
     private javax.swing.JLabel btnTransaksi;
+    private javax.swing.JToggleButton btn_tambahUser;
     private javax.swing.JToggleButton btn_tambahbuku;
     private javax.swing.JToggleButton btn_ubah;
-    private javax.swing.JTextField email_anggota;
+    private javax.swing.JComboBox<String> cmb_role;
     private javax.swing.JLabel gambar;
     private javax.swing.JTextField idkembali;
     private javax.swing.JTextField idkembali1;
@@ -1865,7 +1887,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel input;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1926,14 +1947,9 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JToggleButton jToggleButton4;
     private javax.swing.JToggleButton jToggleButton7;
     private javax.swing.JToggleButton jToggleButton8;
-    private javax.swing.JToggleButton jToggleButton9;
     private javax.swing.JPanel kananpane;
-    private javax.swing.JTextField kelas_anggota;
     private javax.swing.JPanel kiri;
-    private javax.swing.JTextField nama_angoota;
     private javax.swing.JTextField namabuku;
-    private javax.swing.JTextField noHP_anggota;
-    private javax.swing.JTextField pass_anggota;
     private javax.swing.JTextField penerbitbuku;
     private javax.swing.JTextField pengarangbuku;
     private javax.swing.JToggleButton refreshbutton;
@@ -1948,8 +1964,13 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JTable table_pinjam;
     private javax.swing.JTable table_pinjam1;
     private javax.swing.JTextField tf_email;
+    private javax.swing.JTextField tf_emailUser;
+    private javax.swing.JTextField tf_namaUser;
+    private javax.swing.JTextField tf_nimUser;
+    private javax.swing.JTextField tf_nohpUser;
     private javax.swing.JTextField tf_pass;
     private javax.swing.JTextField tf_pass2;
+    private javax.swing.JTextField tf_passUser;
     private javax.swing.JTextField tf_user;
     private javax.swing.JComboBox<String> thnterbit;
     // End of variables declaration//GEN-END:variables
