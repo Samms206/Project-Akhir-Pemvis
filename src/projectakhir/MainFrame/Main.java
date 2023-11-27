@@ -957,27 +957,47 @@ public final class Main extends javax.swing.JFrame {
         clear_pinjam();
     }//GEN-LAST:event_btn_batalpinjamActionPerformed
 
+    private boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
     private void btn_pinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pinjamActionPerformed
         // TODO add your handling code here:
-        if (tf_jumlah.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "masukan jumlah buku terlebih dahulu!");
+        if (tf_jumlah.getText().equals("") || !isNumeric(tf_jumlah.getText())) {
+            JOptionPane.showMessageDialog(this, "masukan jumlah buku terlebih dahulu! atau inputan tidak valid");
         }else{
             try {
-                String query = "INSERT INTO transaksi"
-                    + "(id_user,id_buku,qty,tgl_pinjam,tgl_tenggat) "
-                    + "VALUES (?, ? ,?, ?, ?)";
-                ps = conn.prepareStatement(query);
-                ps.setString(1, id_user);
-                ps.setString(2, tf_kodebuku.getText());
-                ps.setString(3, tf_jumlah.getText());
-                ps.setString(4, tglhari_ini);
-                ps.setString(5, tf_tenggat.getText());
-                ps.executeUpdate();
-                JOptionPane.showMessageDialog(this, "berhasil meminjam buku");
-                show_datapeminjaman();
-                show_history_datapeminjaman();
-                show_buku();
-                clear_pinjam();
+                String stokQuery = "SELECT stok FROM buku WHERE id_buku=?";
+                PreparedStatement stokPs = conn.prepareStatement(stokQuery);
+                stokPs.setString(1, tf_kodebuku.getText());
+                ResultSet stokRs = stokPs.executeQuery();
+                if (stokRs.next()) {
+                    int stokBuku = stokRs.getInt("stok");
+                    int jumlahPeminjaman = Integer.parseInt(tf_jumlah.getText());
+                    if (stokBuku >= jumlahPeminjaman) {
+                        String query = "INSERT INTO transaksi"
+                            + "(id_user,id_buku,qty,tgl_pinjam,tgl_tenggat) "
+                            + "VALUES (?, ? ,?, ?, ?)";
+                        ps = conn.prepareStatement(query);
+                        ps.setString(1, id_user);
+                        ps.setString(2, tf_kodebuku.getText());
+                        ps.setString(3, tf_jumlah.getText());
+                        ps.setString(4, tglhari_ini);
+                        ps.setString(5, tf_tenggat.getText());
+                        ps.executeUpdate();
+                        JOptionPane.showMessageDialog(this, "berhasil meminjam buku");
+                        show_datapeminjaman();
+                        show_history_datapeminjaman();
+                        show_buku();
+                        clear_pinjam();
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Stok buku tidak cukup untuk peminjaman.");
+                    }
+                }
             }catch(SQLException e){
                 JOptionPane.showMessageDialog(this, "Eror "+e.getMessage());
             }

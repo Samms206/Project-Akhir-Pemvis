@@ -44,11 +44,28 @@ public class Admin extends javax.swing.JFrame {
         initComponents();
         warna();
         refresh();
+        enable_false();
     }
     
     void refresh(){
         show_buku();
         show_user();
+    }
+    void enable_false(){
+        tf_namaUser.setEnabled(false);
+        tf_nimUser.setEnabled(false);
+        tf_emailUser.setEnabled(false);
+        tf_nohpUser.setEnabled(false);
+        tf_passUser.setEnabled(false);
+        cmb_role.setEnabled(false);
+    }
+    void enable_true(){
+        tf_namaUser.setEnabled(true);
+        tf_nimUser.setEnabled(true);
+        tf_emailUser.setEnabled(true);
+        tf_nohpUser.setEnabled(true);
+        tf_passUser.setEnabled(true);
+        cmb_role.setEnabled(true);
     }
     void show_buku(){
         Object[] kolom = {
@@ -513,7 +530,7 @@ public class Admin extends javax.swing.JFrame {
         Anggotapane.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 420, -1, 40));
 
         jToggleButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jToggleButton4.setText("Ubah");
+        jToggleButton4.setText("Update");
         jToggleButton4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jToggleButton4MousePressed(evt);
@@ -1377,38 +1394,45 @@ public class Admin extends javax.swing.JFrame {
 
     private void btn_tambahUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahUserActionPerformed
         // TODO add your handling code here:
-        if (tf_emailUser.getText().length() == 0) {
-            JOptionPane.showMessageDialog(this, "email masih kosong!!");
-        }else if(tf_namaUser.getText().length() == 0){
-            JOptionPane.showMessageDialog(this, "nama masih kosong!!");
-        }else if(tf_nohpUser.getText().length() == 0){
-            JOptionPane.showMessageDialog(this, "No HP masih kosong!!");
-        }else if(tf_passUser.getText().length() == 0){
-            JOptionPane.showMessageDialog(this, "Password masih kosong!!");
-        }else if(tf_nimUser.getText().length() == 0){
-            JOptionPane.showMessageDialog(this, "Kelas masih kosong!!");
+        if ("Tambah".equals(btn_tambahUser.getText())) {
+            enable_true();
+            btn_tambahUser.setText("Simpan");
         }else{
-            try {
-                String sql = "INSERT INTO user(username,nim,email,nohp,password,role) values (?,?,?,?,?,?)";
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, tf_namaUser.getText());
-                ps.setString(2, tf_nimUser.getText());
-                ps.setString(3, tf_emailUser.getText());
-                ps.setString(4, tf_nohpUser.getText());
-                ps.setString(5, tf_passUser.getText());
-                String role = "1";
-                String pil = cmb_role.getSelectedItem().toString();
-                if ("User".equals(pil)) {
-                    role = "2";
+            if (tf_emailUser.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "email masih kosong!!");
+            }else if(tf_namaUser.getText().length() == 0){
+                JOptionPane.showMessageDialog(this, "nama masih kosong!!");
+            }else if(tf_nohpUser.getText().length() == 0){
+                JOptionPane.showMessageDialog(this, "No HP masih kosong!!");
+            }else if(tf_passUser.getText().length() == 0){
+                JOptionPane.showMessageDialog(this, "Password masih kosong!!");
+            }else if(tf_nimUser.getText().length() == 0){
+                JOptionPane.showMessageDialog(this, "Kelas masih kosong!!");
+            }else{
+                try {
+                    String sql = "INSERT INTO user(username,nim,email,nohp,password,role) values (?,?,?,?,?,?)";
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.setString(1, tf_namaUser.getText());
+                    ps.setString(2, tf_nimUser.getText());
+                    ps.setString(3, tf_emailUser.getText());
+                    ps.setString(4, tf_nohpUser.getText());
+                    ps.setString(5, tf_passUser.getText());
+                    String role = "1";
+                    String pil = cmb_role.getSelectedItem().toString();
+                    if ("User".equals(pil)) {
+                        role = "2";
+                    }
+                    ps.setString(6, role);
+                    ps.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Berhasil Menambahkan User");
+                    refresh();
+                    enable_false();
+                    btn_tambahUser.setText("Tambah");
+    //                bersih();
+    //                dataanggota();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Gagal Menambahkan User "+e.getMessage());
                 }
-                ps.setString(6, role);
-                ps.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Berhasil Menambahkan User");
-                refresh();
-//                bersih();
-//                dataanggota();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Gagal Menambahkan User "+e.getMessage());
             }
         }
     }//GEN-LAST:event_btn_tambahUserActionPerformed
