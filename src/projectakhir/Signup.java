@@ -194,21 +194,29 @@ public class Signup extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "data masih kosong");
         }else{
             try {
-                String query = "INSERT INTO user"
-                    + "(username,nim,email,nohp,password,role) "
-                    + "VALUES (?, ? ,?, ?, ?, ?)";
-                ps = conn.prepareStatement(query);
-                ps.setString(1, tf_nama.getText());
-                ps.setString(2, tf_nim.getText());
-                ps.setString(3, tf_email.getText());
-                ps.setString(4, tf_nohp.getText());
-                ps.setString(5, tf_password.getText());
-                ps.setString(6, "2");
-                ps.executeUpdate();
-                JOptionPane.showMessageDialog(this, "berhasil register");
-                Login lg = new Login();
-                lg.setVisible(true);
-                this.dispose();
+                String checkNIMQuery = "SELECT * FROM user WHERE nim=?";
+                ps = conn.prepareStatement(checkNIMQuery);
+                ps.setString(1, tf_nim.getText());
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(this, "NIM sudah terdaftar!");
+                } else {
+                    String query = "INSERT INTO user"
+                        + "(username,nim,email,nohp,password,role) "
+                        + "VALUES (?, ? ,?, ?, ?, ?)";
+                    ps = conn.prepareStatement(query);
+                    ps.setString(1, tf_nama.getText());
+                    ps.setString(2, tf_nim.getText());
+                    ps.setString(3, tf_email.getText());
+                    ps.setString(4, tf_nohp.getText());
+                    ps.setString(5, tf_password.getText());
+                    ps.setString(6, "2");
+                    ps.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "berhasil register");
+                    Login lg = new Login();
+                    lg.setVisible(true);
+                    this.dispose();
+                }
             }catch(SQLException e){
                 JOptionPane.showMessageDialog(this, "Eror "+e.getMessage());
             }
