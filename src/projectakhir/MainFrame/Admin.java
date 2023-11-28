@@ -131,7 +131,7 @@ public class Admin extends javax.swing.JFrame {
         btnAnggota = new javax.swing.JLabel();
         btnLibrary = new javax.swing.JLabel();
         btnTransaksi = new javax.swing.JLabel();
-        btnAbout = new javax.swing.JLabel();
+        btnApprove = new javax.swing.JLabel();
         btnLogout = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         kananpane = new javax.swing.JPanel();
@@ -194,26 +194,6 @@ public class Admin extends javax.swing.JFrame {
         thnterbit = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        Datapinjam = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        table_pinjam = new javax.swing.JTable();
-        jTextField13 = new javax.swing.JTextField();
-        jToggleButton7 = new javax.swing.JToggleButton();
-        jToggleButton14 = new javax.swing.JToggleButton();
-        refreshbutton = new javax.swing.JToggleButton();
-        idpinjam = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        Datakembali = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        table_kembali = new javax.swing.JTable();
-        jTextField14 = new javax.swing.JTextField();
-        jToggleButton15 = new javax.swing.JToggleButton();
-        jToggleButton16 = new javax.swing.JToggleButton();
-        idkembali = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        refreshbutton1 = new javax.swing.JToggleButton();
-        jLabel12 = new javax.swing.JLabel();
         DataTransaksi = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -236,6 +216,28 @@ public class Admin extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         refreshbutton3 = new javax.swing.JToggleButton();
         jLabel30 = new javax.swing.JLabel();
+        Dataperpanjangan = new javax.swing.JPanel();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tbl_peminjaman1 = new javax.swing.JTable();
+        jTextField17 = new javax.swing.JTextField();
+        jToggleButton9 = new javax.swing.JToggleButton();
+        jToggleButton20 = new javax.swing.JToggleButton();
+        refreshbutton4 = new javax.swing.JToggleButton();
+        idpinjam2 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tbl_pengembalian1 = new javax.swing.JTable();
+        jTextField18 = new javax.swing.JTextField();
+        jToggleButton21 = new javax.swing.JToggleButton();
+        jToggleButton22 = new javax.swing.JToggleButton();
+        idkembali2 = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
+        refreshbutton5 = new javax.swing.JToggleButton();
+        jLabel35 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -310,21 +312,21 @@ public class Admin extends javax.swing.JFrame {
         });
         kiri.add(btnTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 393, 223, 40));
 
-        btnAbout.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
-        btnAbout.setForeground(new java.awt.Color(255, 255, 255));
-        btnAbout.setEnabled(false);
-        btnAbout.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnApprove.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        btnApprove.setForeground(new java.awt.Color(255, 255, 255));
+        btnApprove.setEnabled(false);
+        btnApprove.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAboutMouseClicked(evt);
+                btnApproveMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAboutMouseExited(evt);
+                btnApproveMouseExited(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnAboutMouseEntered(evt);
+                btnApproveMouseEntered(evt);
             }
         });
-        kiri.add(btnAbout, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 451, 223, 40));
+        kiri.add(btnApprove, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 451, 223, 40));
 
         btnLogout.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(255, 255, 255));
@@ -707,146 +709,6 @@ public class Admin extends javax.swing.JFrame {
 
         kananpane.add(Daftarbuku, "card7");
 
-        Datapinjam.setBackground(new java.awt.Color(255, 255, 255));
-        Datapinjam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        table_pinjam.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                table_pinjamMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(table_pinjam);
-
-        Datapinjam.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 730, 430));
-
-        jTextField13.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField13.setText("Cari Data Peminjam (nama atau kelas)");
-        jTextField13.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField13MouseClicked(evt);
-            }
-        });
-        jTextField13.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField13KeyReleased(evt);
-            }
-        });
-        Datapinjam.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(385, 100, 360, 30));
-
-        jToggleButton7.setBackground(new java.awt.Color(255, 255, 255));
-        jToggleButton7.setText("Cetak");
-        jToggleButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton7ActionPerformed(evt);
-            }
-        });
-        Datapinjam.add(jToggleButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 30));
-
-        jToggleButton14.setBackground(new java.awt.Color(255, 255, 255));
-        jToggleButton14.setText("Delete");
-        jToggleButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton14ActionPerformed(evt);
-            }
-        });
-        Datapinjam.add(jToggleButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 90, 30));
-
-        refreshbutton.setBackground(new java.awt.Color(255, 255, 255));
-        refreshbutton.setText("Refresh");
-        refreshbutton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshbuttonActionPerformed(evt);
-            }
-        });
-        Datapinjam.add(refreshbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 100, 30));
-
-        idpinjam.setEditable(false);
-        idpinjam.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        idpinjam.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 51, 60)));
-        Datapinjam.add(idpinjam, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 40, 30));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel7.setText("Data Peminjaman_____");
-        Datapinjam.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 320, 40));
-        Datapinjam.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        kananpane.add(Datapinjam, "card5");
-
-        Datakembali.setBackground(new java.awt.Color(255, 255, 255));
-        Datakembali.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        table_kembali.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        table_kembali.setGridColor(new java.awt.Color(204, 204, 204));
-        table_kembali.setSelectionBackground(new java.awt.Color(39, 51, 60));
-        table_kembali.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                table_kembaliMouseClicked(evt);
-            }
-        });
-        jScrollPane4.setViewportView(table_kembali);
-
-        Datakembali.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 730, 430));
-
-        jTextField14.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField14.setText("Cari Data Pengembalian (nama atau kelas)");
-        jTextField14.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField14MouseClicked(evt);
-            }
-        });
-        jTextField14.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField14KeyReleased(evt);
-            }
-        });
-        Datakembali.add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(385, 100, 360, 30));
-
-        jToggleButton15.setBackground(new java.awt.Color(255, 255, 255));
-        jToggleButton15.setText("Delete");
-        jToggleButton15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton15ActionPerformed(evt);
-            }
-        });
-        Datakembali.add(jToggleButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 90, 30));
-
-        jToggleButton16.setBackground(new java.awt.Color(255, 255, 255));
-        jToggleButton16.setText("Cetak");
-        jToggleButton16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton16ActionPerformed(evt);
-            }
-        });
-        Datakembali.add(jToggleButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 30));
-
-        idkembali.setEditable(false);
-        idkembali.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        idkembali.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 51, 60)));
-        Datakembali.add(idkembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 40, 30));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel9.setText("Data Pengembalian_____");
-        Datakembali.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 320, 40));
-
-        refreshbutton1.setBackground(new java.awt.Color(255, 255, 255));
-        refreshbutton1.setText("Refresh");
-        refreshbutton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshbutton1ActionPerformed(evt);
-            }
-        });
-        Datakembali.add(refreshbutton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 100, 30));
-        Datakembali.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        kananpane.add(Datakembali, "card6");
-
         DataTransaksi.setBackground(new java.awt.Color(255, 255, 255));
         DataTransaksi.setLayout(new java.awt.CardLayout());
 
@@ -996,6 +858,155 @@ public class Admin extends javax.swing.JFrame {
 
         kananpane.add(DataTransaksi, "card6");
 
+        Dataperpanjangan.setBackground(new java.awt.Color(255, 255, 255));
+        Dataperpanjangan.setLayout(new java.awt.CardLayout());
+
+        jTabbedPane2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tbl_peminjaman1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_peminjaman1MouseClicked(evt);
+            }
+        });
+        jScrollPane7.setViewportView(tbl_peminjaman1);
+
+        jPanel3.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 730, 430));
+
+        jTextField17.setForeground(new java.awt.Color(102, 102, 102));
+        jTextField17.setText("Cari Data Pengembalian (nama, nim atau tanggal)");
+        jTextField17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField17MouseClicked(evt);
+            }
+        });
+        jTextField17.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField17KeyReleased(evt);
+            }
+        });
+        jPanel3.add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 360, 30));
+
+        jToggleButton9.setBackground(new java.awt.Color(255, 255, 255));
+        jToggleButton9.setText("Cetak");
+        jToggleButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton9ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jToggleButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 30));
+
+        jToggleButton20.setBackground(new java.awt.Color(255, 255, 255));
+        jToggleButton20.setText("Delete");
+        jToggleButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton20ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jToggleButton20, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 90, 30));
+
+        refreshbutton4.setBackground(new java.awt.Color(255, 255, 255));
+        refreshbutton4.setText("Refresh");
+        refreshbutton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshbutton4ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(refreshbutton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 100, 30));
+
+        idpinjam2.setEditable(false);
+        idpinjam2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        idpinjam2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 51, 60)));
+        jPanel3.add(idpinjam2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 40, 30));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel12.setText("Data Perpanjangan_____");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 320, 40));
+        jPanel3.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, -1, -1));
+
+        jTabbedPane2.addTab("Peminjaman", jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tbl_pengembalian1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tbl_pengembalian1.setGridColor(new java.awt.Color(204, 204, 204));
+        tbl_pengembalian1.setSelectionBackground(new java.awt.Color(39, 51, 60));
+        tbl_pengembalian1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_pengembalian1MouseClicked(evt);
+            }
+        });
+        jScrollPane8.setViewportView(tbl_pengembalian1);
+
+        jPanel4.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 730, 430));
+
+        jTextField18.setForeground(new java.awt.Color(102, 102, 102));
+        jTextField18.setText("Cari Data Pengembalian (nama, nim atau tanggal)");
+        jTextField18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField18MouseClicked(evt);
+            }
+        });
+        jTextField18.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField18KeyReleased(evt);
+            }
+        });
+        jPanel4.add(jTextField18, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 360, 30));
+
+        jToggleButton21.setBackground(new java.awt.Color(255, 255, 255));
+        jToggleButton21.setText("Delete");
+        jToggleButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton21ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jToggleButton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 90, 30));
+
+        jToggleButton22.setBackground(new java.awt.Color(255, 255, 255));
+        jToggleButton22.setText("Cetak");
+        jToggleButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton22ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jToggleButton22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 30));
+
+        idkembali2.setEditable(false);
+        idkembali2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        idkembali2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 51, 60)));
+        jPanel4.add(idkembali2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 40, 30));
+
+        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel34.setText("Data Pengembalian_____");
+        jPanel4.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 320, 40));
+
+        refreshbutton5.setBackground(new java.awt.Color(255, 255, 255));
+        refreshbutton5.setText("Refresh");
+        refreshbutton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshbutton5ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(refreshbutton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 100, 30));
+        jPanel4.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, -1, -1));
+
+        jTabbedPane2.addTab("Pengembalian", jPanel4);
+
+        Dataperpanjangan.add(jTabbedPane2, "card2");
+
+        kananpane.add(Dataperpanjangan, "card6");
+
         MainPanel.add(kananpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 0, 765, 600));
 
         getContentPane().add(MainPanel, "card2");
@@ -1005,7 +1016,7 @@ public class Admin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     public void warna(){
         btnProfile1.setForeground(new Color(0,0,0,0));
-        btnAbout.setForeground(new Color(0,0,0,0));
+        btnApprove.setForeground(new Color(0,0,0,0));
         btnAnggota.setForeground(new Color(0,0,0,0));
         btnLibrary.setForeground(new Color(0,0,0,0));
         btnLogout.setForeground(new Color(0,0,0,0));
@@ -1095,26 +1106,19 @@ public class Admin extends javax.swing.JFrame {
         btnTransaksi.setForeground(new Color(37,51,60));
     }//GEN-LAST:event_btnTransaksiMouseExited
 
-    private void btnAboutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAboutMouseClicked
-        // TODO add your handling code here:
-        kananpane.removeAll();
-        kananpane.repaint();
-        kananpane.revalidate();
-        //
-        kananpane.add(Datakembali);
-        kananpane.repaint();
-        kananpane.revalidate();
-    }//GEN-LAST:event_btnAboutMouseClicked
+    private void btnApproveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApproveMouseClicked
 
-    private void btnAboutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAboutMouseEntered
-        // TODO add your handling code here:
-        btnAbout.setForeground(Color.WHITE);
-    }//GEN-LAST:event_btnAboutMouseEntered
+    }//GEN-LAST:event_btnApproveMouseClicked
 
-    private void btnAboutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAboutMouseExited
+    private void btnApproveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApproveMouseEntered
         // TODO add your handling code here:
-        btnAbout.setForeground(new Color(37,51,60));
-    }//GEN-LAST:event_btnAboutMouseExited
+        btnApprove.setForeground(Color.WHITE);
+    }//GEN-LAST:event_btnApproveMouseEntered
+
+    private void btnApproveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApproveMouseExited
+        // TODO add your handling code here:
+        btnApprove.setForeground(new Color(37,51,60));
+    }//GEN-LAST:event_btnApproveMouseExited
 
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
         // TODO add your handling code here:
@@ -1613,200 +1617,6 @@ public class Admin extends javax.swing.JFrame {
 //        databuku();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void table_pinjamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_pinjamMouseClicked
-        // TODO add your handling code here:
-        try {
-            int row = table_pinjam.getSelectedRow();
-            TableModel model = table_pinjam.getModel();
-            //menampilkan data dari table ke texfield, jlabel dll
-            idpinjam.setText(model.getValueAt(row, 0).toString());
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_table_pinjamMouseClicked
-
-    private void jTextField13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField13MouseClicked
-        // TODO add your handling code here:
-        jTextField13.setText("");
-    }//GEN-LAST:event_jTextField13MouseClicked
-
-    private void jTextField13KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField13KeyReleased
-        // TODO add your handling code here:
-        int jumlahrow = table_pinjam.getRowCount();
-        for(int n=0; n < jumlahrow; n++){
-            model_pinjam.removeRow(0);
-        }
-        try {
-            String sql ="select*from history where nama like '%"+jTextField13.getText()+"%' or kelas like '%"+jTextField13.getText()+"%'";
-            st = conn.createStatement();
-            rs = st.executeQuery(sql);
-            int no = 1;
-            while (rs.next()) {
-                Object[] objk = new Object[7];
-                objk [0] = rs.getString("idhistory");
-                objk [1] = rs.getString("nama");
-                objk [2] = rs.getString("kelas");
-                objk [3] = rs.getString("buku");
-                objk [4] = rs.getString("jmlhBuku");
-                objk [5] = rs.getString("tglPinjam");
-                objk [6] = rs.getString("tglKmbl");
-                model_pinjam.addRow(objk);
-                no++;
-            }
-            table_pinjam.setModel(model_pinjam);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Cari eroor "+e);
-        }
-
-    }//GEN-LAST:event_jTextField13KeyReleased
-
-    private void jToggleButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton7ActionPerformed
-        // TODO add your handling code here:
-//        JasperReport reports;
-//        String lokasifile = "C:\\Users\\USER\\Documents\\NetBeansProjects\\TugasMembuatAplikasi\\src\\Sekolah\\report_siswa.jasper";
-//        try {
-//            reports = (JasperReport) JRLoader.loadObjectFromFile(lokasifile);
-//            JasperPrint jprint = JasperFillManager.fillReport(lokasifile, null, conn);
-//            JasperViewer jview = new JasperViewer(jprint, false);
-//            jview.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//            jview.setVisible(true);
-//
-//        } catch (JRException e) {
-//            JOptionPane.showMessageDialog(this, "Report GAGAL karena "+e.getMessage());
-//        }
-
-    }//GEN-LAST:event_jToggleButton7ActionPerformed
-
-    private void jToggleButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton14ActionPerformed
-        // TODO add your handling code here:
-        if (idpinjam.getText().length() == 0) {
-            JOptionPane.showMessageDialog(this, "belum ada data yang  dipilih!!!");
-        }else{
-            try {
-                int opsi = JOptionPane.showConfirmDialog(null, "Benarkah anda ingin menghapus data ini ?");
-                switch(opsi){
-                    case JOptionPane.YES_OPTION:
-                    String sql = "delete FROM history where idhistory ='"+idpinjam.getText()+"'" ;
-                    PreparedStatement ps = conn.prepareStatement(sql);
-                    ps.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
-                    model_pinjam.setRowCount(0);
-//                    bersih();
-//                    datapinjam();
-                    break;
-                    case JOptionPane.NO_OPTION:
-                    break;
-                    default:
-                    break;
-                }
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "gagal"+e.getMessage());
-
-            }
-        }
-
-    }//GEN-LAST:event_jToggleButton14ActionPerformed
-
-    private void refreshbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshbuttonActionPerformed
-        // TODO add your handling code here:
-        idpinjam.setText("");
-    }//GEN-LAST:event_refreshbuttonActionPerformed
-
-    private void table_kembaliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_kembaliMouseClicked
-        // TODO add your handling code here:
-        try {
-            int row = table_kembali.getSelectedRow();
-            TableModel model = table_kembali.getModel();
-            //menampilkan data dari table ke texfield, jlabel dll
-            idkembali.setText(model.getValueAt(row, 0).toString());
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_table_kembaliMouseClicked
-
-    private void jTextField14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField14MouseClicked
-        // TODO add your handling code here:
-        jTextField14.setText("");
-    }//GEN-LAST:event_jTextField14MouseClicked
-
-    private void jTextField14KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField14KeyReleased
-        // TODO add your handling code here:
-        int jumlahrow = table_kembali.getRowCount();
-        for(int n=0; n < jumlahrow; n++){
-            model_kembali.removeRow(0);
-        }
-        try {
-            String sql ="select*from kembali where nama like '%"+jTextField14.getText()+"%' or kelas like '%"+jTextField14.getText()+"%'";
-            st = conn.createStatement();
-            rs = st.executeQuery(sql);
-            int no = 1;
-            while (rs.next()) {
-                Object[] objk = new Object[8];
-                objk [0] = rs.getString("no");
-                objk [1] = rs.getString("nama");
-                objk [2] = rs.getString("kelas");
-                objk [3] = rs.getString("buku");
-                objk [4] = rs.getString("jmlhBuku");
-                objk [5] = rs.getString("tglPinjam");
-                objk [6] = rs.getString("tglKmbl");
-                objk [7] = rs.getString("denda");
-                model_kembali.addRow(objk);
-                no++;
-            }
-            table_kembali.setModel(model_kembali);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Cari eroor "+e);
-        }
-    }//GEN-LAST:event_jTextField14KeyReleased
-
-    private void jToggleButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton15ActionPerformed
-        // TODO add your handling code here:
-        if (idkembali.getText().length() == 0) {
-            JOptionPane.showMessageDialog(this, "belum ada data yang  dipilih!!!");
-        }else{
-            try {
-                int opsi = JOptionPane.showConfirmDialog(null, "Benarkah anda ingin menghapus data ini ?");
-                switch(opsi){
-                    case JOptionPane.YES_OPTION:
-                    String sql = "delete FROM kembali where no ='"+idkembali.getText()+"'" ;
-                    PreparedStatement ps = conn.prepareStatement(sql);
-                    ps.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
-                    model_kembali.setRowCount(0);
-//                    bersih();
-//                    datakembali();
-                    break;
-                    case JOptionPane.NO_OPTION:
-                    break;
-                    default:
-                    break;
-                }
-
-            } catch (Exception e) {
-            }
-        }
-    }//GEN-LAST:event_jToggleButton15ActionPerformed
-
-    private void jToggleButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton16ActionPerformed
-        // TODO add your handling code here:
-//        JasperReport reports;
-//        String lokasifile = "C:\\Program Files (x86)\\Dreams Team\\Libeeo\\src\\reportEdu\\kembali_libeeo.jasper";
-//        try {
-//            reports = (JasperReport) JRLoader.loadObjectFromFile(lokasifile);
-//            JasperPrint jprint = JasperFillManager.fillReport(lokasifile, null, conn);
-//            JasperViewer jview = new JasperViewer(jprint, false);
-//            jview.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//            jview.setVisible(true);
-//
-//        } catch (JRException e) {
-//            JOptionPane.showMessageDialog(this, "Report GAGAL karena "+e.getMessage());
-//        }
-    }//GEN-LAST:event_jToggleButton16ActionPerformed
-
-    private void refreshbutton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshbutton1ActionPerformed
-        // TODO add your handling code here:
-        idkembali.setText("");
-    }//GEN-LAST:event_refreshbutton1ActionPerformed
-
     private void tbl_peminjamanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_peminjamanMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tbl_peminjamanMouseClicked
@@ -1855,6 +1665,54 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_refreshbutton3ActionPerformed
 
+    private void tbl_peminjaman1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_peminjaman1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbl_peminjaman1MouseClicked
+
+    private void jTextField17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField17MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField17MouseClicked
+
+    private void jTextField17KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField17KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField17KeyReleased
+
+    private void jToggleButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton9ActionPerformed
+
+    private void jToggleButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton20ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton20ActionPerformed
+
+    private void refreshbutton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshbutton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_refreshbutton4ActionPerformed
+
+    private void tbl_pengembalian1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_pengembalian1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbl_pengembalian1MouseClicked
+
+    private void jTextField18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField18MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField18MouseClicked
+
+    private void jTextField18KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField18KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField18KeyReleased
+
+    private void jToggleButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton21ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton21ActionPerformed
+
+    private void jToggleButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton22ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton22ActionPerformed
+
+    private void refreshbutton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshbutton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_refreshbutton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1894,12 +1752,11 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel Anggotapane;
     private javax.swing.JPanel Daftarbuku;
     private javax.swing.JPanel DataTransaksi;
-    private javax.swing.JPanel Datakembali;
-    private javax.swing.JPanel Datapinjam;
+    private javax.swing.JPanel Dataperpanjangan;
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPanel Profilepane;
-    private javax.swing.JLabel btnAbout;
     private javax.swing.JLabel btnAnggota;
+    private javax.swing.JLabel btnApprove;
     private javax.swing.JLabel btnLibrary;
     private javax.swing.JLabel btnLogout;
     private javax.swing.JLabel btnProfile1;
@@ -1909,15 +1766,14 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JToggleButton btn_ubah;
     private javax.swing.JComboBox<String> cmb_role;
     private javax.swing.JLabel gambar;
-    private javax.swing.JTextField idkembali;
     private javax.swing.JTextField idkembali1;
-    private javax.swing.JTextField idpinjam;
+    private javax.swing.JTextField idkembali2;
     private javax.swing.JTextField idpinjam1;
+    private javax.swing.JTextField idpinjam2;
     private javax.swing.JLabel input;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -1941,57 +1797,61 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
+    private javax.swing.JTextField jTextField17;
+    private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton10;
     private javax.swing.JToggleButton jToggleButton12;
     private javax.swing.JToggleButton jToggleButton13;
-    private javax.swing.JToggleButton jToggleButton14;
-    private javax.swing.JToggleButton jToggleButton15;
-    private javax.swing.JToggleButton jToggleButton16;
     private javax.swing.JToggleButton jToggleButton17;
     private javax.swing.JToggleButton jToggleButton18;
     private javax.swing.JToggleButton jToggleButton19;
+    private javax.swing.JToggleButton jToggleButton20;
+    private javax.swing.JToggleButton jToggleButton21;
+    private javax.swing.JToggleButton jToggleButton22;
     private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JToggleButton jToggleButton4;
-    private javax.swing.JToggleButton jToggleButton7;
     private javax.swing.JToggleButton jToggleButton8;
+    private javax.swing.JToggleButton jToggleButton9;
     private javax.swing.JPanel kananpane;
     private javax.swing.JPanel kiri;
     private javax.swing.JTextField namabuku;
     private javax.swing.JTextField penerbitbuku;
     private javax.swing.JTextField pengarangbuku;
-    private javax.swing.JToggleButton refreshbutton;
-    private javax.swing.JToggleButton refreshbutton1;
     private javax.swing.JToggleButton refreshbutton2;
     private javax.swing.JToggleButton refreshbutton3;
+    private javax.swing.JToggleButton refreshbutton4;
+    private javax.swing.JToggleButton refreshbutton5;
     private javax.swing.JTextField stokbuku;
     private javax.swing.JTable tabel_buku;
     private javax.swing.JTable table_anggota;
-    private javax.swing.JTable table_kembali;
-    private javax.swing.JTable table_pinjam;
     private javax.swing.JTable tbl_peminjaman;
+    private javax.swing.JTable tbl_peminjaman1;
     private javax.swing.JTable tbl_pengembalian;
+    private javax.swing.JTable tbl_pengembalian1;
     private javax.swing.JTextField tf_email;
     private javax.swing.JTextField tf_emailUser;
     private javax.swing.JTextField tf_namaUser;
