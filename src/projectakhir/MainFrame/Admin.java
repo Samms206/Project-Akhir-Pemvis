@@ -13,9 +13,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import projectakhir.FrontView;
 
 /**
@@ -802,7 +809,7 @@ public class Admin extends javax.swing.JFrame {
                 jTextField15KeyReleased(evt);
             }
         });
-        jPanel1.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 360, 30));
+        jPanel1.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 340, 30));
 
         jToggleButton8.setBackground(new java.awt.Color(255, 255, 255));
         jToggleButton8.setText("Cetak");
@@ -814,13 +821,13 @@ public class Admin extends javax.swing.JFrame {
         jPanel1.add(jToggleButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 30));
 
         refreshbutton2.setBackground(new java.awt.Color(255, 255, 255));
-        refreshbutton2.setText("Refresh");
+        refreshbutton2.setText("Cari");
         refreshbutton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshbutton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(refreshbutton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 100, 30));
+        jPanel1.add(refreshbutton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, 90, 30));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel11.setText("Data Peminjaman_____");
@@ -863,7 +870,7 @@ public class Admin extends javax.swing.JFrame {
                 jTextField16KeyReleased(evt);
             }
         });
-        jPanel2.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 360, 30));
+        jPanel2.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 340, 30));
 
         jToggleButton19.setBackground(new java.awt.Color(255, 255, 255));
         jToggleButton19.setText("Cetak");
@@ -879,13 +886,13 @@ public class Admin extends javax.swing.JFrame {
         jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 320, 40));
 
         refreshbutton3.setBackground(new java.awt.Color(255, 255, 255));
-        refreshbutton3.setText("Refresh");
+        refreshbutton3.setText("cari");
         refreshbutton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshbutton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(refreshbutton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 100, 30));
+        jPanel2.add(refreshbutton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, 90, 30));
         jPanel2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, -1, -1));
 
         jTabbedPane1.addTab("Pengembalian", jPanel2);
@@ -1619,6 +1626,15 @@ public class Admin extends javax.swing.JFrame {
 
     private void jToggleButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton8ActionPerformed
         // TODO add your handling code here:
+        try {
+            String path = "/Users/macbookpro/NetBeansProjects/ProjectAkhir/src/Report/data_peminjaman.jrxml";
+            HashMap hash = new HashMap();
+            JasperReport jrpt = JasperCompileManager.compileReport(path);
+            JasperPrint jprint = JasperFillManager.fillReport(jrpt, hash, conn);
+            JasperViewer.viewReport(jprint, false);
+        } catch (JRException e) {
+            System.out.println("error : " + e.getMessage());
+        }
     }//GEN-LAST:event_jToggleButton8ActionPerformed
 
     private void refreshbutton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshbutton2ActionPerformed

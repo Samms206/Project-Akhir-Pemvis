@@ -1050,7 +1050,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="380" y="70" width="360" height="30"/>
+                              <AbsoluteConstraints x="310" y="70" width="340" height="30"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1075,14 +1075,14 @@
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Refresh"/>
+                            <Property name="text" type="java.lang.String" value="Cari"/>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refreshbutton2ActionPerformed"/>
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="90" y="70" width="100" height="30"/>
+                              <AbsoluteConstraints x="650" y="70" width="90" height="30"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1172,7 +1172,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="380" y="70" width="360" height="30"/>
+                              <AbsoluteConstraints x="310" y="70" width="340" height="30"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1210,14 +1210,14 @@
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Refresh"/>
+                            <Property name="text" type="java.lang.String" value="cari"/>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refreshbutton3ActionPerformed"/>
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="90" y="70" width="100" height="30"/>
+                              <AbsoluteConstraints x="650" y="70" width="90" height="30"/>
                             </Constraint>
                           </Constraints>
                         </Component>
