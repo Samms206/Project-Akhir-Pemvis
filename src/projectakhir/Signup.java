@@ -6,11 +6,15 @@
 package projectakhir;
 import controller.koneksi;
 import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,8 +40,36 @@ public class Signup extends javax.swing.JFrame {
         tf_password.setBackground(new Color(0,0,0,0));
         cb_tampil.setBackground(new Color(0,0,0,0));
         tf_email.setBackground(new Color(0,0,0,0));
+        
+        validasi_angka();
     }
-
+    private boolean isValidEmail(String email) {
+        // Format email Gmail menggunakan regular expression
+        String regex = "^[a-zA-Z0-9_]+@gmail\\.com$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+    void validasi_angka(){
+        tf_nim.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char inputChar = e.getKeyChar();
+                if (!Character.isDigit(inputChar)) {
+                    e.consume();
+                }
+            }
+        });
+        tf_nohp.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char inputChar = e.getKeyChar();
+                if (!Character.isDigit(inputChar)) {
+                    e.consume();
+                }
+            }
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -190,8 +222,9 @@ public class Signup extends javax.swing.JFrame {
             || tf_nim.getText().equals("") 
             || tf_email.getText().equals("") 
             || tf_nohp.getText().equals("") 
-            || tf_password.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "data masih kosong");
+            || tf_password.getText().equals("")
+            || !isValidEmail(tf_email.getText())) {
+            JOptionPane.showMessageDialog(this, "Data masih kosong atau Data tidak valid");
         }else{
             try {
                 String checkNIMQuery = "SELECT * FROM user WHERE nim=?";
