@@ -45,6 +45,8 @@ public class Admin extends javax.swing.JFrame {
         warna();
         refresh();
         enable_false();
+        show_datapeminjaman();
+        show_datapengembalian();
     }
     
     void refresh(){
@@ -110,6 +112,69 @@ public class Admin extends javax.swing.JFrame {
               rs.getString("role")
             };
               model_anggota.addRow(data);
+          }
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    void show_datapeminjaman(){
+        Object[] kolom = {
+            "ID", "Username", "Buku", "Qty", "Tgl Pinjam", "Tgl Tenggat"
+        };
+        model_pinjam = new DefaultTableModel(null, kolom);
+        tbl_peminjaman.setModel(model_pinjam);
+        tbl_peminjaman.setModel(model_pinjam);
+        try {
+          st = conn.createStatement();
+          rs = st.executeQuery("SELECT "
+                  + "id_trans, user.username, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat, transaksi.tgl_kembali, transaksi.denda "
+                  + "FROM `transaksi`, `buku`, `user` "
+                  + "WHERE user.id_user = transaksi.id_user "
+                  + "AND buku.id_buku = transaksi.id_buku "
+                  + "AND transaksi.tgl_kembali IS NULL");
+          while (rs.next()) {
+            Object[] data = {
+              rs.getString("id_trans"),
+              rs.getString("username"),
+              rs.getString("namabuku"),
+              rs.getString("qty"),
+              rs.getString("tgl_pinjam"),
+              rs.getString("tgl_tenggat")
+            };
+              model_pinjam.addRow(data);
+          }
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    void show_datapengembalian(){
+        Object[] kolom = {
+            "ID", "Username", "Buku", "Qty", "Tgl Pinjam", "Tgl Tenggat", "Tgl Kembali", "Denda", "Status"
+        };
+        model_kembali = new DefaultTableModel(null, kolom);
+        tbl_pengembalian.setModel(model_kembali);
+        tbl_pengembalian.setModel(model_kembali);
+        try {
+          st = conn.createStatement();
+          rs = st.executeQuery("SELECT "
+                  + "id_trans, user.username, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat, transaksi.tgl_kembali, transaksi.denda, transaksi.status "
+                  + "FROM `transaksi`, `buku`, `user` "
+                  + "WHERE user.id_user = transaksi.id_user "
+                  + "AND buku.id_buku = transaksi.id_buku "
+                  + "AND transaksi.tgl_kembali IS NOT NULL");
+          while (rs.next()) {
+            Object[] data = {
+              rs.getString("id_trans"),
+              rs.getString("username"),
+              rs.getString("namabuku"),
+              rs.getString("qty"),
+              rs.getString("tgl_pinjam"),
+              rs.getString("tgl_tenggat"),
+              rs.getString("tgl_kembali"),
+              rs.getString("denda"),
+              rs.getString("status")
+            };
+              model_kembali.addRow(data);
           }
         } catch(SQLException e) {
             System.out.println(e.getMessage());
@@ -201,18 +266,14 @@ public class Admin extends javax.swing.JFrame {
         tbl_peminjaman = new javax.swing.JTable();
         jTextField15 = new javax.swing.JTextField();
         jToggleButton8 = new javax.swing.JToggleButton();
-        jToggleButton17 = new javax.swing.JToggleButton();
         refreshbutton2 = new javax.swing.JToggleButton();
-        idpinjam1 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbl_pengembalian = new javax.swing.JTable();
         jTextField16 = new javax.swing.JTextField();
-        jToggleButton18 = new javax.swing.JToggleButton();
         jToggleButton19 = new javax.swing.JToggleButton();
-        idkembali1 = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         refreshbutton3 = new javax.swing.JToggleButton();
         jLabel30 = new javax.swing.JLabel();
@@ -752,15 +813,6 @@ public class Admin extends javax.swing.JFrame {
         });
         jPanel1.add(jToggleButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 30));
 
-        jToggleButton17.setBackground(new java.awt.Color(255, 255, 255));
-        jToggleButton17.setText("Delete");
-        jToggleButton17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton17ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jToggleButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 90, 30));
-
         refreshbutton2.setBackground(new java.awt.Color(255, 255, 255));
         refreshbutton2.setText("Refresh");
         refreshbutton2.addActionListener(new java.awt.event.ActionListener() {
@@ -768,12 +820,7 @@ public class Admin extends javax.swing.JFrame {
                 refreshbutton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(refreshbutton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 100, 30));
-
-        idpinjam1.setEditable(false);
-        idpinjam1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        idpinjam1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 51, 60)));
-        jPanel1.add(idpinjam1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 40, 30));
+        jPanel1.add(refreshbutton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 100, 30));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel11.setText("Data Peminjaman_____");
@@ -818,15 +865,6 @@ public class Admin extends javax.swing.JFrame {
         });
         jPanel2.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 360, 30));
 
-        jToggleButton18.setBackground(new java.awt.Color(255, 255, 255));
-        jToggleButton18.setText("Delete");
-        jToggleButton18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton18ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jToggleButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 90, 30));
-
         jToggleButton19.setBackground(new java.awt.Color(255, 255, 255));
         jToggleButton19.setText("Cetak");
         jToggleButton19.addActionListener(new java.awt.event.ActionListener() {
@@ -835,11 +873,6 @@ public class Admin extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jToggleButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 30));
-
-        idkembali1.setEditable(false);
-        idkembali1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        idkembali1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 51, 60)));
-        jPanel2.add(idkembali1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 40, 30));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel24.setText("Data Pengembalian_____");
@@ -852,7 +885,7 @@ public class Admin extends javax.swing.JFrame {
                 refreshbutton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(refreshbutton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 100, 30));
+        jPanel2.add(refreshbutton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 100, 30));
         jPanel2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, -1, -1));
 
         jTabbedPane1.addTab("Pengembalian", jPanel2);
@@ -1588,10 +1621,6 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jToggleButton8ActionPerformed
 
-    private void jToggleButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton17ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton17ActionPerformed
-
     private void refreshbutton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshbutton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_refreshbutton2ActionPerformed
@@ -1607,10 +1636,6 @@ public class Admin extends javax.swing.JFrame {
     private void jTextField16KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField16KeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField16KeyReleased
-
-    private void jToggleButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton18ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton18ActionPerformed
 
     private void jToggleButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton19ActionPerformed
         // TODO add your handling code here:
@@ -1673,8 +1698,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JToggleButton btn_ubah;
     private javax.swing.JComboBox<String> cmb_role;
     private javax.swing.JLabel gambar;
-    private javax.swing.JTextField idkembali1;
-    private javax.swing.JTextField idpinjam1;
     private javax.swing.JLabel input;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -1737,8 +1760,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JToggleButton jToggleButton10;
     private javax.swing.JToggleButton jToggleButton12;
     private javax.swing.JToggleButton jToggleButton13;
-    private javax.swing.JToggleButton jToggleButton17;
-    private javax.swing.JToggleButton jToggleButton18;
     private javax.swing.JToggleButton jToggleButton19;
     private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JToggleButton jToggleButton4;
