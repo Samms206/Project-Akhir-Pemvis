@@ -227,12 +227,13 @@ public class Signup extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Data masih kosong atau Data tidak valid");
         }else{
             try {
-                String checkNIMQuery = "SELECT * FROM user WHERE nim=?";
+                String checkNIMQuery = "SELECT * FROM user WHERE nim=? OR email=?";
                 ps = conn.prepareStatement(checkNIMQuery);
                 ps.setString(1, tf_nim.getText());
+                ps.setString(2, tf_email.getText());
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    JOptionPane.showMessageDialog(this, "NIM sudah terdaftar!");
+                    JOptionPane.showMessageDialog(this, "NIM atau Email sudah terdaftar!");
                 } else {
                     String query = "INSERT INTO user"
                         + "(username,nim,email,nohp,password,role) "
