@@ -219,25 +219,28 @@ public class Admin extends javax.swing.JFrame {
         Dataperpanjangan = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        tbl_peminjaman1 = new javax.swing.JTable();
-        jTextField17 = new javax.swing.JTextField();
-        jToggleButton9 = new javax.swing.JToggleButton();
-        jToggleButton20 = new javax.swing.JToggleButton();
-        refreshbutton4 = new javax.swing.JToggleButton();
-        idpinjam2 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel33 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        tbl_pengembalian1 = new javax.swing.JTable();
-        jTextField18 = new javax.swing.JTextField();
-        jToggleButton21 = new javax.swing.JToggleButton();
-        jToggleButton22 = new javax.swing.JToggleButton();
-        idkembali2 = new javax.swing.JTextField();
+        namabuku1 = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
-        refreshbutton5 = new javax.swing.JToggleButton();
-        jLabel35 = new javax.swing.JLabel();
+        namabuku2 = new javax.swing.JTextField();
+        namabuku3 = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        namabuku4 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel38 = new javax.swing.JLabel();
+        namabuku5 = new javax.swing.JTextField();
+        jLabel39 = new javax.swing.JLabel();
+        namabuku6 = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
+        jLabel40 = new javax.swing.JLabel();
+        namabuku7 = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -774,7 +777,7 @@ public class Admin extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel11.setText("Data Peminjaman_____");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 320, 40));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 320, 40));
         jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, -1, -1));
 
         jTabbedPane1.addTab("Peminjaman", jPanel1);
@@ -840,7 +843,7 @@ public class Admin extends javax.swing.JFrame {
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel24.setText("Data Pengembalian_____");
-        jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 320, 40));
+        jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 320, 40));
 
         refreshbutton3.setBackground(new java.awt.Color(255, 255, 255));
         refreshbutton3.setText("Refresh");
@@ -866,142 +869,94 @@ public class Admin extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tbl_peminjaman1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_peminjaman1MouseClicked(evt);
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel7.setText("Data Perpanjangan_____");
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 350, 40));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        });
-        jScrollPane7.setViewportView(tbl_peminjaman1);
+        ));
+        jScrollPane3.setViewportView(jTable1);
 
-        jPanel3.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 730, 430));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 720, 260));
 
-        jTextField17.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField17.setText("Cari Data Pengembalian (nama, nim atau tanggal)");
-        jTextField17.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField17MouseClicked(evt);
-            }
-        });
-        jTextField17.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField17KeyReleased(evt);
-            }
-        });
-        jPanel3.add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 360, 30));
+        jLabel33.setText("ID");
+        jPanel3.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 20));
 
-        jToggleButton9.setBackground(new java.awt.Color(255, 255, 255));
-        jToggleButton9.setText("Cetak");
-        jToggleButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton9ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jToggleButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 30));
+        namabuku1.setEditable(false);
+        jPanel3.add(namabuku1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 190, 30));
 
-        jToggleButton20.setBackground(new java.awt.Color(255, 255, 255));
-        jToggleButton20.setText("Delete");
-        jToggleButton20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton20ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jToggleButton20, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 90, 30));
+        jLabel34.setText("Nama");
+        jPanel3.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 30));
 
-        refreshbutton4.setBackground(new java.awt.Color(255, 255, 255));
-        refreshbutton4.setText("Refresh");
-        refreshbutton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshbutton4ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(refreshbutton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 100, 30));
+        namabuku2.setEditable(false);
+        jPanel3.add(namabuku2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 190, 30));
 
-        idpinjam2.setEditable(false);
-        idpinjam2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        idpinjam2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 51, 60)));
-        jPanel3.add(idpinjam2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 40, 30));
+        namabuku3.setEditable(false);
+        jPanel3.add(namabuku3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 190, 30));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel12.setText("Data Perpanjangan_____");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 320, 40));
-        jPanel3.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, -1, -1));
+        jLabel36.setText("Buku");
+        jPanel3.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, 30));
 
-        jTabbedPane2.addTab("Peminjaman", jPanel3);
+        jLabel37.setText("Jumlah");
+        jPanel3.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, 30));
+
+        namabuku4.setEditable(false);
+        jPanel3.add(namabuku4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 190, 30));
+
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jButton3.setText("Batal");
+        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 100, 40));
+
+        jButton4.setBackground(new java.awt.Color(255, 255, 255));
+        jButton4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(0, 204, 51));
+        jButton4.setText("Setujui");
+        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, 190, 40));
+
+        jLabel38.setText("Tanggal Pinjam");
+        jPanel3.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, -1, 30));
+
+        namabuku5.setEditable(false);
+        jPanel3.add(namabuku5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 270, 30));
+
+        jLabel39.setText("Tanggal Tenggat");
+        jPanel3.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, -1, 30));
+
+        namabuku6.setEditable(false);
+        jPanel3.add(namabuku6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 270, 30));
+
+        jButton5.setBackground(new java.awt.Color(255, 255, 255));
+        jButton5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 0, 0));
+        jButton5.setText("Tolak");
+        jPanel3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, 110, 40));
+
+        jLabel40.setText("Tanggal Perpanjang");
+        jPanel3.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, -1, 30));
+
+        namabuku7.setEditable(false);
+        jPanel3.add(namabuku7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 270, 30));
+
+        jTabbedPane2.addTab("Data Perpanjangan", jPanel3);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tbl_pengembalian1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel9.setText("History Perpanjangan_____");
+        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 370, 40));
 
-            },
-            new String [] {
-
-            }
-        ));
-        tbl_pengembalian1.setGridColor(new java.awt.Color(204, 204, 204));
-        tbl_pengembalian1.setSelectionBackground(new java.awt.Color(39, 51, 60));
-        tbl_pengembalian1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_pengembalian1MouseClicked(evt);
-            }
-        });
-        jScrollPane8.setViewportView(tbl_pengembalian1);
-
-        jPanel4.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 730, 430));
-
-        jTextField18.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField18.setText("Cari Data Pengembalian (nama, nim atau tanggal)");
-        jTextField18.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField18MouseClicked(evt);
-            }
-        });
-        jTextField18.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField18KeyReleased(evt);
-            }
-        });
-        jPanel4.add(jTextField18, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 360, 30));
-
-        jToggleButton21.setBackground(new java.awt.Color(255, 255, 255));
-        jToggleButton21.setText("Delete");
-        jToggleButton21.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton21ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jToggleButton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 90, 30));
-
-        jToggleButton22.setBackground(new java.awt.Color(255, 255, 255));
-        jToggleButton22.setText("Cetak");
-        jToggleButton22.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton22ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jToggleButton22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 30));
-
-        idkembali2.setEditable(false);
-        idkembali2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        idkembali2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(39, 51, 60)));
-        jPanel4.add(idkembali2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 40, 30));
-
-        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel34.setText("Data Pengembalian_____");
-        jPanel4.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 320, 40));
-
-        refreshbutton5.setBackground(new java.awt.Color(255, 255, 255));
-        refreshbutton5.setText("Refresh");
-        refreshbutton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshbutton5ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(refreshbutton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 100, 30));
-        jPanel4.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, -1, -1));
-
-        jTabbedPane2.addTab("Pengembalian", jPanel4);
+        jTabbedPane2.addTab("History Perpanjangan", jPanel4);
 
         Dataperpanjangan.add(jTabbedPane2, "card2");
 
@@ -1665,54 +1620,6 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_refreshbutton3ActionPerformed
 
-    private void tbl_peminjaman1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_peminjaman1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbl_peminjaman1MouseClicked
-
-    private void jTextField17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField17MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField17MouseClicked
-
-    private void jTextField17KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField17KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField17KeyReleased
-
-    private void jToggleButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton9ActionPerformed
-
-    private void jToggleButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton20ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton20ActionPerformed
-
-    private void refreshbutton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshbutton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_refreshbutton4ActionPerformed
-
-    private void tbl_pengembalian1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_pengembalian1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbl_pengembalian1MouseClicked
-
-    private void jTextField18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField18MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField18MouseClicked
-
-    private void jTextField18KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField18KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField18KeyReleased
-
-    private void jToggleButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton21ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton21ActionPerformed
-
-    private void jToggleButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton22ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton22ActionPerformed
-
-    private void refreshbutton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshbutton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_refreshbutton5ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -1767,15 +1674,15 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmb_role;
     private javax.swing.JLabel gambar;
     private javax.swing.JTextField idkembali1;
-    private javax.swing.JTextField idkembali2;
     private javax.swing.JTextField idpinjam1;
-    private javax.swing.JTextField idpinjam2;
     private javax.swing.JLabel input;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -1799,28 +1706,32 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton10;
@@ -1829,29 +1740,28 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JToggleButton jToggleButton17;
     private javax.swing.JToggleButton jToggleButton18;
     private javax.swing.JToggleButton jToggleButton19;
-    private javax.swing.JToggleButton jToggleButton20;
-    private javax.swing.JToggleButton jToggleButton21;
-    private javax.swing.JToggleButton jToggleButton22;
     private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JToggleButton jToggleButton4;
     private javax.swing.JToggleButton jToggleButton8;
-    private javax.swing.JToggleButton jToggleButton9;
     private javax.swing.JPanel kananpane;
     private javax.swing.JPanel kiri;
     private javax.swing.JTextField namabuku;
+    private javax.swing.JTextField namabuku1;
+    private javax.swing.JTextField namabuku2;
+    private javax.swing.JTextField namabuku3;
+    private javax.swing.JTextField namabuku4;
+    private javax.swing.JTextField namabuku5;
+    private javax.swing.JTextField namabuku6;
+    private javax.swing.JTextField namabuku7;
     private javax.swing.JTextField penerbitbuku;
     private javax.swing.JTextField pengarangbuku;
     private javax.swing.JToggleButton refreshbutton2;
     private javax.swing.JToggleButton refreshbutton3;
-    private javax.swing.JToggleButton refreshbutton4;
-    private javax.swing.JToggleButton refreshbutton5;
     private javax.swing.JTextField stokbuku;
     private javax.swing.JTable tabel_buku;
     private javax.swing.JTable table_anggota;
     private javax.swing.JTable tbl_peminjaman;
-    private javax.swing.JTable tbl_peminjaman1;
     private javax.swing.JTable tbl_pengembalian;
-    private javax.swing.JTable tbl_pengembalian1;
     private javax.swing.JTextField tf_email;
     private javax.swing.JTextField tf_emailUser;
     private javax.swing.JTextField tf_namaUser;
