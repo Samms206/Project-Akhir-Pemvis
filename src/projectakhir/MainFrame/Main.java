@@ -7,6 +7,8 @@ package projectakhir.MainFrame;
 
 import controller.koneksi;
 import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +20,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
@@ -63,6 +67,7 @@ public final class Main extends javax.swing.JFrame {
         show_profile();
         show_buku();
         tanggalhari_ini();
+        validasi_angka();
         show_datapeminjaman();
         show_history_datapeminjaman();
     }
@@ -904,8 +909,9 @@ public final class Main extends javax.swing.JFrame {
                 || tf_email.getText().equals("") 
                 || tf_nohp.getText().equals("") 
                 || tf_password.getText().equals("")
-                || tf_konfirmpassword.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "form masih kosong");
+                || tf_konfirmpassword.getText().equals("")
+                || !isValidEmail(tf_email.getText())) {
+                JOptionPane.showMessageDialog(this, "Form masih kosong atau data tidak valid");
             }else{
                 if (tf_password.getText().equals(tf_konfirmpassword.getText())) {
                     try {
@@ -927,7 +933,7 @@ public final class Main extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "Eror "+e.getMessage());
                     }
                 }else{
-                    JOptionPane.showMessageDialog(this, "password tidak sama!");
+                    JOptionPane.showMessageDialog(this, "Password tidak sama!");
                 }
                 
             }
@@ -1214,6 +1220,42 @@ public final class Main extends javax.swing.JFrame {
         btnProfile.setForeground(Color.WHITE);
         btnpeminjaman.setForeground(Color.WHITE);
         btnPengembalian.setForeground(Color.WHITE);
+    }
+    void validasi_angka(){
+        tf_nim.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char inputChar = e.getKeyChar();
+                if (!Character.isDigit(inputChar)) {
+                    e.consume();
+                }
+            }
+        });
+        tf_nohp.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char inputChar = e.getKeyChar();
+                if (!Character.isDigit(inputChar)) {
+                    e.consume();
+                }
+            }
+        });
+        tf_jumlah.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char inputChar = e.getKeyChar();
+                if (!Character.isDigit(inputChar)) {
+                    e.consume();
+                }
+            }
+        });
+    }
+    private boolean isValidEmail(String email) {
+        // Format email Gmail menggunakan regular expression
+        String regex = "^[a-zA-Z0-9_]+@gmail\\.com$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
     /**
      * @param args the command line arguments
