@@ -52,6 +52,7 @@ public final class Main extends javax.swing.JFrame {
     long denda = 0, selisihTenggat = 0;
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel modelpinjam = new DefaultTableModel();
+    DefaultTableModel modelpinjamdiperpanjangan = new DefaultTableModel();
     DefaultTableModel modelhistory = new DefaultTableModel();
         DefaultTableModel modelstatusperpanjangan = new DefaultTableModel();
 
@@ -75,6 +76,7 @@ public final class Main extends javax.swing.JFrame {
         show_datapeminjaman();
         show_history_datapeminjaman();
         show_statusPerpanjangan();
+        show_datapeminjaman_diPerpanjangan();
     }
 
     private Main() {
@@ -684,14 +686,35 @@ public final class Main extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
-    
     void show_datapeminjaman(){
         Object[] kolom = {
             "ID", "Username", "Buku", "Qty", "Tgl Pinjam", "Tgl Tenggat"
         };
         modelpinjam = new DefaultTableModel(null, kolom);
         tbl_datapinjam.setModel(modelpinjam);
-        tbl_datapinjam1.setModel(modelpinjam);
+        try {
+          st = conn.createStatement();
+          rs = st.executeQuery("SELECT transaksi.id_trans, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat FROM transaksi JOIN buku ON buku.id_buku = transaksi.id_buku JOIN user ON user.id_user = transaksi.id_user WHERE transaksi.tgl_kembali IS NULL AND transaksi.id_user = "+id_user);
+          while (rs.next()) {
+            Object[] data = {
+              rs.getString("id_trans"),
+              rs.getString("namabuku"),
+              rs.getString("qty"),
+              rs.getString("tgl_pinjam"),
+              rs.getString("tgl_tenggat")
+            };
+              modelpinjam.addRow(data);
+          }
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    void show_datapeminjaman_diPerpanjangan(){
+        Object[] kolom = {
+            "ID", "Username", "Buku", "Qty", "Tgl Pinjam", "Tgl Tenggat"
+        };
+        modelpinjamdiperpanjangan = new DefaultTableModel(null, kolom);
+        tbl_datapinjam1.setModel(modelpinjamdiperpanjangan);
         try {
           st = conn.createStatement();
           rs = st.executeQuery("SELECT "
@@ -711,7 +734,7 @@ public final class Main extends javax.swing.JFrame {
               rs.getString("tgl_pinjam"),
               rs.getString("tgl_tenggat")
             };
-              modelpinjam.addRow(data);
+              modelpinjamdiperpanjangan.addRow(data);
           }
         } catch(SQLException e) {
             System.out.println(e.getMessage());
@@ -1219,6 +1242,7 @@ public final class Main extends javax.swing.JFrame {
                     show_datapeminjaman();
                     show_history_datapeminjaman();
                     show_statusPerpanjangan();
+                    show_datapeminjaman_diPerpanjangan();
                     //clear
                     tf_transaksidipilih1.setText("");
                     tgl_tenggat = "00-00-0000";
