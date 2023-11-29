@@ -696,10 +696,12 @@ public final class Main extends javax.swing.JFrame {
           st = conn.createStatement();
           rs = st.executeQuery("SELECT "
                   + "id_trans, user.username, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat, transaksi.tgl_kembali, transaksi.denda "
-                  + "FROM `transaksi`, `buku`, `user` "
+                  + "FROM `transaksi`, `buku`, `user`, `perpanjangan` "
                   + "WHERE user.id_user = transaksi.id_user "
                   + "AND buku.id_buku = transaksi.id_buku "
-                  + "AND transaksi.id_user = '"+id_user+"' AND transaksi.tgl_kembali IS NULL");
+                  + "AND transaksi.id_trans = perpanjangan.id_perpanjangan "
+                  + "AND transaksi.id_user = '"+id_user+"' AND transaksi.tgl_kembali IS NULL "
+                  + "AND perpanjangan.status = 'diproses'");
           while (rs.next()) {
             Object[] data = {
               rs.getString("id_trans"),
