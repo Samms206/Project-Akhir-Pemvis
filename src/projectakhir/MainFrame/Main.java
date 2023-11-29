@@ -7,6 +7,7 @@ package projectakhir.MainFrame;
 
 import controller.koneksi;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -14,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -46,7 +48,7 @@ public final class Main extends javax.swing.JFrame {
     private PreparedStatement ps;
     Connection conn = koneksi.Koneksi();
     String id_user="0", username="0", email="0", nim="0", nohp="0", password="0", role="0";
-    String id_buku="0", tglhari_ini = "0", id_trans = "0", tgl_tenggat = "00-00-0000";
+    String id_buku="0", tglhari_ini = "0", id_trans = "0", tgl_tenggat = "00-00-0000", tgl_tenggat_lama = "00-00-0000";;
     long denda = 0, selisihTenggat = 0;
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel modelpinjam = new DefaultTableModel();
@@ -563,6 +565,9 @@ public final class Main extends javax.swing.JFrame {
         tbl_statusperpanjangan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_statusperpanjanganMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tbl_statusperpanjanganMouseEntered(evt);
             }
         });
         jScrollPane4.setViewportView(tbl_statusperpanjangan);
@@ -1176,49 +1181,60 @@ public final class Main extends javax.swing.JFrame {
     private void btn_perpanjangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_perpanjangActionPerformed
         // TODO add your handling code here:
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        
         //
-        LocalDate currentDate = LocalDate.now();
-        LocalDate futureDate = currentDate.plusDays(10);
-        // Format the date using DateTimeFormatter
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String formattedFutureDate = futureDate.format(formatter);
+        try {
+            String checkNIMQuery = "SELECT * FROM transaksi WHERE id_trans=?";
+            ps = conn.prepareStatement(checkNIMQuery);
+            ps.setString(1, id_trans);
+            ResultSet rst = ps.executeQuery();
+            if (rst.next()) {
+                tgl_tenggat_lama = rst.getString("tgl_tenggat");
+            }
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
 
         try {
             Date dateTenggat = sdf.parse(tgl_tenggat);
             Date dateKembali = sdf.parse(tglhari_ini);
             long selisihMillis = dateKembali.getTime() - dateTenggat.getTime();
             long selisihHari = TimeUnit.DAYS.convert(selisihMillis, TimeUnit.MILLISECONDS);
-
+//            System.out.println("tgl hari ini " + tglhari_ini);
+//            System.out.println("tgl tenggat " + tgl_tenggat);
             System.out.println("selisih " + selisihHari);
+            System.out.println("tgl tenggat lama " + tgl_tenggat_lama);
             if (selisihHari >= -2 && selisihHari <= 0) {
                 try {
-                    String query = "INSERT INTO perpanjangan(id_trans,tgl_perpanjangan,tgl_tenggat) "
+                    String query = "INSERT INTO perpanjangan(id_trans,tgl_perpanjangan,tgl_tenggat_lama) "
                             + "VALUES(?,?,?)";
                     ps = conn.prepareStatement(query);
                     ps.setString(1, id_trans);
                     ps.setString(2, tglhari_ini);
-                    ps.setString(3, formattedFutureDate);
+                    ps.setString(3, tgl_tenggat_lama);
                     ps.executeUpdate();
-                    JOptionPane.showMessageDialog(this, "berhasil mengembalikan buku");
+                    JOptionPane.showMessageDialog(this, "Berhasil mengajukan penpanjangan");
                     show_datapeminjaman();
                     show_history_datapeminjaman();
+                    show_statusPerpanjangan();
                     //clear
                     tf_transaksidipilih1.setText("");
                     tgl_tenggat = "00-00-0000";
                     id_trans = "0";
+                    tgl_tenggat_lama = "00-00-0000";
                     btn_perpanjang.setEnabled(false);
                     enable_false();
                 }catch(SQLException e){
                     JOptionPane.showMessageDialog(this, "Eror "+e.getMessage());
                 }
             }else if(selisihHari > 0){
-                JOptionPane.showMessageDialog(this, "Tidak dapat melakukan perpanjangan\nKarena Sudah melebihi Tanggal tenggatn");
+                JOptionPane.showMessageDialog(this, "Tidak dapat melakukan perpanjangan\nKarena Sudah melebihi Tanggal tenggat");
             }else{
                 JOptionPane.showMessageDialog(this, "Tidak dapat melakukan Perpanjangan \nSebelum H-2 Tenggat");
             }
             
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (HeadlessException | ParseException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_btn_perpanjangActionPerformed
 
@@ -1238,13 +1254,7 @@ public final class Main extends javax.swing.JFrame {
 
     private void tbl_statusperpanjanganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_statusperpanjanganMouseClicked
         // TODO add your handling code here:
-        btn_perpanjang.setEnabled(true);
-        int selectedRow = tbl_statusperpanjangan.getSelectedRow();
-        if (selectedRow != -1) {
-            id_trans = tbl_statusperpanjangan.getValueAt(selectedRow, 0).toString();
-            tgl_tenggat = tbl_statusperpanjangan.getValueAt(selectedRow, 5).toString();
-            tf_transaksidipilih1.setText(id_trans);
-        }
+        
     }//GEN-LAST:event_tbl_statusperpanjanganMouseClicked
 
     private void btn_cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cetakActionPerformed
@@ -1279,7 +1289,18 @@ public final class Main extends javax.swing.JFrame {
 
     private void tbl_datapinjam1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_datapinjam1MouseClicked
         // TODO add your handling code here:
+        btn_perpanjang.setEnabled(true);
+        int selectedRow = tbl_datapinjam1.getSelectedRow();
+        if (selectedRow != -1) {
+            id_trans = tbl_datapinjam1.getValueAt(selectedRow, 0).toString();
+            tgl_tenggat = tbl_datapinjam1.getValueAt(selectedRow, 5).toString();
+            tf_transaksidipilih1.setText(id_trans);
+        }
     }//GEN-LAST:event_tbl_datapinjam1MouseClicked
+
+    private void tbl_statusperpanjanganMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_statusperpanjanganMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbl_statusperpanjanganMouseEntered
     public void frontCondition(){
         btnLogout.setForeground(Color.WHITE);
         btnPerpanjangan.setForeground(Color.WHITE);
