@@ -683,7 +683,7 @@ public final class Main extends javax.swing.JFrame {
               modelhistory.addRow(data);
           }
         } catch(SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("1"+e.getMessage());
         }
     }
     void show_datapeminjaman(){
@@ -706,7 +706,7 @@ public final class Main extends javax.swing.JFrame {
               modelpinjam.addRow(data);
           }
         } catch(SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("2"+e.getMessage());
         }
     }
     void show_datapeminjaman_diPerpanjangan(){
@@ -718,7 +718,7 @@ public final class Main extends javax.swing.JFrame {
         try {
           st = conn.createStatement();
           rs = st.executeQuery("SELECT "
-                  + "id_trans, user.username, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat, transaksi.tgl_kembali, transaksi.denda "
+                  + "transaksi.id_trans, user.username, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat, transaksi.tgl_kembali, transaksi.denda "
                   + "FROM `transaksi`, `buku`, `user`, `perpanjangan` "
                   + "WHERE user.id_user = transaksi.id_user "
                   + "AND buku.id_buku = transaksi.id_buku "
@@ -737,7 +737,7 @@ public final class Main extends javax.swing.JFrame {
               modelpinjamdiperpanjangan.addRow(data);
           }
         } catch(SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("3"+e.getMessage());
         }
     }
     
@@ -769,7 +769,7 @@ public final class Main extends javax.swing.JFrame {
               modelstatusperpanjangan.addRow(data);
           }
         } catch(SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("4"+e.getMessage());
         }
     }
     
@@ -802,7 +802,7 @@ public final class Main extends javax.swing.JFrame {
               model.addRow(data);
           }
         } catch(SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("5"+e.getMessage());
         }
     }
     void show_profile(){
