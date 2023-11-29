@@ -51,6 +51,8 @@ public final class Main extends javax.swing.JFrame {
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel modelpinjam = new DefaultTableModel();
     DefaultTableModel modelhistory = new DefaultTableModel();
+        DefaultTableModel modelstatusperpanjangan = new DefaultTableModel();
+
 
 
     
@@ -70,6 +72,7 @@ public final class Main extends javax.swing.JFrame {
         validasi_angka();
         show_datapeminjaman();
         show_history_datapeminjaman();
+        show_statusPerpanjangan();
     }
 
     private Main() {
@@ -147,12 +150,15 @@ public final class Main extends javax.swing.JFrame {
         perpanjangan_pane = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tbl_datapinjam1 = new javax.swing.JTable();
+        tbl_statusperpanjangan = new javax.swing.JTable();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         tf_transaksidipilih1 = new javax.swing.JTextField();
         btn_batalperpanjangan = new javax.swing.JButton();
         btn_perpanjang = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tbl_datapinjam1 = new javax.swing.JTable();
+        jLabel23 = new javax.swing.JLabel();
         dashboard_pane = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
 
@@ -540,10 +546,10 @@ public final class Main extends javax.swing.JFrame {
         perpanjangan_pane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-        jLabel4.setText("Perpanjangan__________");
-        perpanjangan_pane.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+        jLabel4.setText("Status__________");
+        perpanjangan_pane.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
 
-        tbl_datapinjam1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_statusperpanjangan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -554,14 +560,14 @@ public final class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbl_datapinjam1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbl_statusperpanjangan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_datapinjam1MouseClicked(evt);
+                tbl_statusperpanjanganMouseClicked(evt);
             }
         });
-        jScrollPane4.setViewportView(tbl_datapinjam1);
+        jScrollPane4.setViewportView(tbl_statusperpanjangan);
 
-        perpanjangan_pane.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 710, 140));
+        perpanjangan_pane.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 710, 160));
 
         jLabel20.setFont(new java.awt.Font("Helvetica Neue", 2, 10)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 51, 51));
@@ -596,6 +602,30 @@ public final class Main extends javax.swing.JFrame {
             }
         });
         perpanjangan_pane.add(btn_perpanjang, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 300, 120, 40));
+
+        tbl_datapinjam1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tbl_datapinjam1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_datapinjam1MouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tbl_datapinjam1);
+
+        perpanjangan_pane.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 710, 140));
+
+        jLabel23.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel23.setText("Perpanjangan__________");
+        perpanjangan_pane.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         rightPane.add(perpanjangan_pane, "card6");
 
@@ -675,6 +705,38 @@ public final class Main extends javax.swing.JFrame {
               rs.getString("tgl_tenggat")
             };
               modelpinjam.addRow(data);
+          }
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    void show_statusPerpanjangan(){
+        Object[] kolom = {
+            "ID", "Buku", "Qty", "Tgl Pinjam", "Tgl Tenggat", "Tgl Diajukan", "Status"
+        };
+        modelstatusperpanjangan = new DefaultTableModel(null, kolom);
+        tbl_statusperpanjangan.setModel(modelstatusperpanjangan);
+        try {
+          st = conn.createStatement();
+          rs = st.executeQuery("SELECT "
+                  + "transaksi.id_trans, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat, perpanjangan.tgl_perpanjangan as tgl_diajukan, perpanjangan.status "
+                  + "FROM `transaksi`, `buku`, `user`, `perpanjangan` "
+                  + "WHERE user.id_user = transaksi.id_user  "
+                  + "AND buku.id_buku = transaksi.id_buku  "
+                  + "AND transaksi.id_trans = perpanjangan.id_trans "
+                  + "AND transaksi.id_user = "+id_user);
+          while (rs.next()) {
+            Object[] data = {
+              rs.getString("id_trans"),
+              rs.getString("namabuku"),
+              rs.getString("qty"),
+              rs.getString("tgl_pinjam"),
+              rs.getString("tgl_tenggat"),
+              rs.getString("tgl_diajukan"),
+              rs.getString("status"),
+            };
+              modelstatusperpanjangan.addRow(data);
           }
         } catch(SQLException e) {
             System.out.println(e.getMessage());
@@ -1174,16 +1236,16 @@ public final class Main extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tbl_datapinjamMouseClicked
 
-    private void tbl_datapinjam1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_datapinjam1MouseClicked
+    private void tbl_statusperpanjanganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_statusperpanjanganMouseClicked
         // TODO add your handling code here:
         btn_perpanjang.setEnabled(true);
-        int selectedRow = tbl_datapinjam1.getSelectedRow();
+        int selectedRow = tbl_statusperpanjangan.getSelectedRow();
         if (selectedRow != -1) {
-            id_trans = tbl_datapinjam1.getValueAt(selectedRow, 0).toString();
-            tgl_tenggat = tbl_datapinjam1.getValueAt(selectedRow, 5).toString();
+            id_trans = tbl_statusperpanjangan.getValueAt(selectedRow, 0).toString();
+            tgl_tenggat = tbl_statusperpanjangan.getValueAt(selectedRow, 5).toString();
             tf_transaksidipilih1.setText(id_trans);
         }
-    }//GEN-LAST:event_tbl_datapinjam1MouseClicked
+    }//GEN-LAST:event_tbl_statusperpanjanganMouseClicked
 
     private void btn_cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cetakActionPerformed
         // TODO add your handling code here:
@@ -1214,6 +1276,10 @@ public final class Main extends javax.swing.JFrame {
         btn_cetak.setEnabled(false);
         tf_idcetak.setText("");
     }//GEN-LAST:event_btn_batalcetakActionPerformed
+
+    private void tbl_datapinjam1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_datapinjam1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbl_datapinjam1MouseClicked
     public void frontCondition(){
         btnLogout.setForeground(Color.WHITE);
         btnPerpanjangan.setForeground(Color.WHITE);
@@ -1328,6 +1394,7 @@ public final class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1339,6 +1406,7 @@ public final class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPanel leftPane;
     private javax.swing.JPanel peminjaman_pane;
     private javax.swing.JPanel pengembalian_pane;
@@ -1349,6 +1417,7 @@ public final class Main extends javax.swing.JFrame {
     private javax.swing.JTable tbl_datapinjam;
     private javax.swing.JTable tbl_datapinjam1;
     private javax.swing.JTable tbl_datapinjamhistory;
+    private javax.swing.JTable tbl_statusperpanjangan;
     private javax.swing.JTextField tf_caribuku;
     private javax.swing.JTextField tf_email;
     private javax.swing.JTextField tf_idcetak;

@@ -1655,6 +1655,15 @@ public class Admin extends javax.swing.JFrame {
 
     private void jToggleButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton19ActionPerformed
         // TODO add your handling code here:
+        try {
+            String path = "/Users/macbookpro/NetBeansProjects/ProjectAkhir/src/Report/data_pengembalian.jrxml";
+            HashMap hash = new HashMap();
+            JasperReport jrpt = JasperCompileManager.compileReport(path);
+            JasperPrint jprint = JasperFillManager.fillReport(jrpt, hash, conn);
+            JasperViewer.viewReport(jprint, false);
+        } catch (JRException e) {
+            System.out.println("error : " + e.getMessage());
+        }
     }//GEN-LAST:event_jToggleButton19ActionPerformed
 
     private void refreshbutton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshbutton3ActionPerformed
