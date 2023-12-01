@@ -320,7 +320,7 @@ public class Admin extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tbl_statusperpanjangan = new javax.swing.JTable();
         jLabel33 = new javax.swing.JLabel();
-        id_perpanjangan = new javax.swing.JTextField();
+        tf_idpp = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
         tf_namapp = new javax.swing.JTextField();
         tf_bukupp = new javax.swing.JTextField();
@@ -954,6 +954,11 @@ public class Admin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_statusperpanjangan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_statusperpanjanganMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tbl_statusperpanjangan);
 
         jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 720, 260));
@@ -961,8 +966,8 @@ public class Admin extends javax.swing.JFrame {
         jLabel33.setText("ID");
         jPanel3.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 20));
 
-        id_perpanjangan.setEditable(false);
-        jPanel3.add(id_perpanjangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 190, 30));
+        tf_idpp.setEditable(false);
+        jPanel3.add(tf_idpp, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 190, 30));
 
         jLabel34.setText("Nama");
         jPanel3.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 30));
@@ -1706,6 +1711,20 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_refreshbutton3ActionPerformed
 
+    private void tbl_statusperpanjanganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_statusperpanjanganMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = tbl_statusperpanjangan.getSelectedRow();
+        if (selectedRow != -1) {
+            tf_idpp.setText(tbl_statusperpanjangan.getValueAt(selectedRow, 0).toString());
+            tf_namapp.setText(tbl_statusperpanjangan.getValueAt(selectedRow, 1).toString());
+            tf_bukupp.setText(tbl_statusperpanjangan.getValueAt(selectedRow, 2).toString());
+            tf_jumlahpp.setText(tbl_statusperpanjangan.getValueAt(selectedRow, 3).toString());
+            tf_tglpinjampp.setText(tbl_statusperpanjangan.getValueAt(selectedRow, 4).toString());
+            tf_tenggatpp.setText(tbl_statusperpanjangan.getValueAt(selectedRow, 5).toString());
+            tf_tglpp.setText(tbl_statusperpanjangan.getValueAt(selectedRow, 6).toString());
+        }
+    }//GEN-LAST:event_tbl_statusperpanjanganMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1762,7 +1781,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JToggleButton btn_ubah;
     private javax.swing.JComboBox<String> cmb_role;
     private javax.swing.JLabel gambar;
-    private javax.swing.JTextField id_perpanjangan;
     private javax.swing.JLabel input;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -1841,6 +1859,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JTextField tf_bukupp;
     private javax.swing.JTextField tf_email;
     private javax.swing.JTextField tf_emailUser;
+    private javax.swing.JTextField tf_idpp;
     private javax.swing.JTextField tf_jumlahpp;
     private javax.swing.JTextField tf_namaUser;
     private javax.swing.JTextField tf_namapp;
