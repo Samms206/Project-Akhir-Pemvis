@@ -56,6 +56,8 @@ public class Admin extends javax.swing.JFrame {
         show_datapeminjaman();
         show_datapengembalian();
         show_status_perpanjangan();
+        btn_setujui.setEnabled(false);
+        btn_tolak.setEnabled(false);
     }
     
     void refresh(){
@@ -990,6 +992,11 @@ public class Admin extends javax.swing.JFrame {
         btn_batal.setBackground(new java.awt.Color(255, 255, 255));
         btn_batal.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btn_batal.setText("Batal");
+        btn_batal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_batalActionPerformed(evt);
+            }
+        });
         jPanel3.add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 100, 40));
 
         btn_setujui.setBackground(new java.awt.Color(255, 255, 255));
@@ -1714,6 +1721,8 @@ public class Admin extends javax.swing.JFrame {
     private void tbl_statusperpanjanganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_statusperpanjanganMouseClicked
         // TODO add your handling code here:
         int selectedRow = tbl_statusperpanjangan.getSelectedRow();
+        btn_setujui.setEnabled(true);
+        btn_tolak.setEnabled(true);
         if (selectedRow != -1) {
             tf_idpp.setText(tbl_statusperpanjangan.getValueAt(selectedRow, 0).toString());
             tf_namapp.setText(tbl_statusperpanjangan.getValueAt(selectedRow, 1).toString());
@@ -1724,6 +1733,19 @@ public class Admin extends javax.swing.JFrame {
             tf_tglpp.setText(tbl_statusperpanjangan.getValueAt(selectedRow, 6).toString());
         }
     }//GEN-LAST:event_tbl_statusperpanjanganMouseClicked
+
+    private void btn_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batalActionPerformed
+        // TODO add your handling code here:
+        tf_idpp.setText("");
+        tf_namapp.setText("");
+        tf_bukupp.setText("");
+        tf_jumlahpp.setText("");
+        tf_tglpinjampp.setText("");
+        tf_tenggatpp.setText("");
+        tf_tglpp.setText("");
+        btn_setujui.setEnabled(false);
+        btn_tolak.setEnabled(false);
+    }//GEN-LAST:event_btn_batalActionPerformed
 
     /**
      * @param args the command line arguments
