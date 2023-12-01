@@ -44,6 +44,7 @@ public class Admin extends javax.swing.JFrame {
     DefaultTableModel model_buku = new DefaultTableModel();
     DefaultTableModel model_pinjam = new DefaultTableModel();
     DefaultTableModel model_kembali = new DefaultTableModel();
+    DefaultTableModel model_statuspp = new DefaultTableModel();
     
     String id_buku = "0", id_user = "0";
     
@@ -54,6 +55,7 @@ public class Admin extends javax.swing.JFrame {
         enable_false();
         show_datapeminjaman();
         show_datapengembalian();
+        show_status_perpanjangan();
     }
     
     void refresh(){
@@ -187,6 +189,33 @@ public class Admin extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
+    void show_status_perpanjangan(){
+        Object[] kolom = {
+            "ID", "Username", "Buku", "Qty", "Tgl Pinjam", "Tgl Tenggat", "Tgl Perpanjangan", "Status"
+        };
+        model_statuspp = new DefaultTableModel(null, kolom);
+        tbl_statusperpanjangan.setModel(model_statuspp);
+        tbl_statusperpanjangan.setModel(model_statuspp);
+        try {
+          st = conn.createStatement();
+          rs = st.executeQuery("SELECT perpanjangan.id_perpanjangan as id, user.username, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, perpanjangan.tgl_tenggat_lama, perpanjangan.tgl_perpanjangan, perpanjangan.status FROM perpanjangan,transaksi,buku,user where perpanjangan.id_trans = transaksi.id_trans AND transaksi.id_user = user.id_user AND transaksi.id_buku = buku.id_buku");
+          while (rs.next()) {
+            Object[] data = {
+              rs.getString("id"),
+              rs.getString("username"),
+              rs.getString("namabuku"),
+              rs.getString("qty"),
+              rs.getString("tgl_pinjam"),
+              rs.getString("tgl_tenggat_lama"),
+              rs.getString("tgl_perpanjangan"),
+              rs.getString("status")
+            };
+              model_statuspp.addRow(data);
+          }
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -289,24 +318,24 @@ public class Admin extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_statusperpanjangan = new javax.swing.JTable();
         jLabel33 = new javax.swing.JLabel();
-        namabuku1 = new javax.swing.JTextField();
+        id_perpanjangan = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
-        namabuku2 = new javax.swing.JTextField();
-        namabuku3 = new javax.swing.JTextField();
+        tf_namapp = new javax.swing.JTextField();
+        tf_bukupp = new javax.swing.JTextField();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
-        namabuku4 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        tf_jumlahpp = new javax.swing.JTextField();
+        btn_batal = new javax.swing.JButton();
+        btn_setujui = new javax.swing.JButton();
         jLabel38 = new javax.swing.JLabel();
-        namabuku5 = new javax.swing.JTextField();
+        tf_tglpinjampp = new javax.swing.JTextField();
         jLabel39 = new javax.swing.JLabel();
-        namabuku6 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        tf_tenggatpp = new javax.swing.JTextField();
+        btn_tolak = new javax.swing.JButton();
         jLabel40 = new javax.swing.JLabel();
-        namabuku7 = new javax.swing.JTextField();
+        tf_tglpp = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
 
@@ -914,7 +943,7 @@ public class Admin extends javax.swing.JFrame {
         jLabel7.setText("Data Perpanjangan_____");
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 350, 40));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_statusperpanjangan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -925,24 +954,24 @@ public class Admin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(tbl_statusperpanjangan);
 
         jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 720, 260));
 
         jLabel33.setText("ID");
         jPanel3.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 20));
 
-        namabuku1.setEditable(false);
-        jPanel3.add(namabuku1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 190, 30));
+        id_perpanjangan.setEditable(false);
+        jPanel3.add(id_perpanjangan, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 190, 30));
 
         jLabel34.setText("Nama");
         jPanel3.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 30));
 
-        namabuku2.setEditable(false);
-        jPanel3.add(namabuku2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 190, 30));
+        tf_namapp.setEditable(false);
+        jPanel3.add(tf_namapp, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 190, 30));
 
-        namabuku3.setEditable(false);
-        jPanel3.add(namabuku3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 190, 30));
+        tf_bukupp.setEditable(false);
+        jPanel3.add(tf_bukupp, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 190, 30));
 
         jLabel36.setText("Buku");
         jPanel3.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, 30));
@@ -950,43 +979,43 @@ public class Admin extends javax.swing.JFrame {
         jLabel37.setText("Jumlah");
         jPanel3.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, 30));
 
-        namabuku4.setEditable(false);
-        jPanel3.add(namabuku4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 190, 30));
+        tf_jumlahpp.setEditable(false);
+        jPanel3.add(tf_jumlahpp, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 190, 30));
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jButton3.setText("Batal");
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 100, 40));
+        btn_batal.setBackground(new java.awt.Color(255, 255, 255));
+        btn_batal.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btn_batal.setText("Batal");
+        jPanel3.add(btn_batal, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 100, 40));
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jButton4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 204, 51));
-        jButton4.setText("Setujui");
-        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, 190, 40));
+        btn_setujui.setBackground(new java.awt.Color(255, 255, 255));
+        btn_setujui.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btn_setujui.setForeground(new java.awt.Color(0, 204, 51));
+        btn_setujui.setText("Setujui");
+        jPanel3.add(btn_setujui, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, 190, 40));
 
         jLabel38.setText("Tanggal Pinjam");
         jPanel3.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, -1, 30));
 
-        namabuku5.setEditable(false);
-        jPanel3.add(namabuku5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 270, 30));
+        tf_tglpinjampp.setEditable(false);
+        jPanel3.add(tf_tglpinjampp, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 270, 30));
 
         jLabel39.setText("Tanggal Tenggat");
         jPanel3.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, -1, 30));
 
-        namabuku6.setEditable(false);
-        jPanel3.add(namabuku6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 270, 30));
+        tf_tenggatpp.setEditable(false);
+        jPanel3.add(tf_tenggatpp, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 270, 30));
 
-        jButton5.setBackground(new java.awt.Color(255, 255, 255));
-        jButton5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 0, 0));
-        jButton5.setText("Tolak");
-        jPanel3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, 110, 40));
+        btn_tolak.setBackground(new java.awt.Color(255, 255, 255));
+        btn_tolak.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btn_tolak.setForeground(new java.awt.Color(255, 0, 0));
+        btn_tolak.setText("Tolak");
+        jPanel3.add(btn_tolak, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, 110, 40));
 
         jLabel40.setText("Tanggal Perpanjang");
         jPanel3.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, -1, 30));
 
-        namabuku7.setEditable(false);
-        jPanel3.add(namabuku7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 270, 30));
+        tf_tglpp.setEditable(false);
+        jPanel3.add(tf_tglpp, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 270, 30));
 
         jTabbedPane2.addTab("Data Perpanjangan", jPanel3);
 
@@ -1725,17 +1754,18 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel btnLogout;
     private javax.swing.JLabel btnProfile1;
     private javax.swing.JLabel btnTransaksi;
+    private javax.swing.JButton btn_batal;
+    private javax.swing.JButton btn_setujui;
     private javax.swing.JToggleButton btn_tambahUser;
     private javax.swing.JToggleButton btn_tambahbuku;
+    private javax.swing.JButton btn_tolak;
     private javax.swing.JToggleButton btn_ubah;
     private javax.swing.JComboBox<String> cmb_role;
     private javax.swing.JLabel gambar;
+    private javax.swing.JTextField id_perpanjangan;
     private javax.swing.JLabel input;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
@@ -1783,7 +1813,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
@@ -1799,13 +1828,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel kananpane;
     private javax.swing.JPanel kiri;
     private javax.swing.JTextField namabuku;
-    private javax.swing.JTextField namabuku1;
-    private javax.swing.JTextField namabuku2;
-    private javax.swing.JTextField namabuku3;
-    private javax.swing.JTextField namabuku4;
-    private javax.swing.JTextField namabuku5;
-    private javax.swing.JTextField namabuku6;
-    private javax.swing.JTextField namabuku7;
     private javax.swing.JTextField penerbitbuku;
     private javax.swing.JTextField pengarangbuku;
     private javax.swing.JToggleButton refreshbutton2;
@@ -1815,14 +1837,21 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JTable table_anggota;
     private javax.swing.JTable tbl_peminjaman;
     private javax.swing.JTable tbl_pengembalian;
+    private javax.swing.JTable tbl_statusperpanjangan;
+    private javax.swing.JTextField tf_bukupp;
     private javax.swing.JTextField tf_email;
     private javax.swing.JTextField tf_emailUser;
+    private javax.swing.JTextField tf_jumlahpp;
     private javax.swing.JTextField tf_namaUser;
+    private javax.swing.JTextField tf_namapp;
     private javax.swing.JTextField tf_nimUser;
     private javax.swing.JTextField tf_nohpUser;
     private javax.swing.JTextField tf_pass;
     private javax.swing.JTextField tf_pass2;
     private javax.swing.JTextField tf_passUser;
+    private javax.swing.JTextField tf_tenggatpp;
+    private javax.swing.JTextField tf_tglpinjampp;
+    private javax.swing.JTextField tf_tglpp;
     private javax.swing.JTextField tf_user;
     private javax.swing.JComboBox<String> thnterbit;
     // End of variables declaration//GEN-END:variables

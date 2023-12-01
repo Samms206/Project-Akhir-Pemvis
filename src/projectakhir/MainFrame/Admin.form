@@ -1306,7 +1306,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTable" name="jTable1">
+                            <Component class="javax.swing.JTable" name="tbl_statusperpanjangan">
                               <Properties>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                                   <Table columnCount="4" rowCount="4">
@@ -1330,7 +1330,7 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="namabuku1">
+                        <Component class="javax.swing.JTextField" name="id_perpanjangan">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
                           </Properties>
@@ -1350,7 +1350,7 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="namabuku2">
+                        <Component class="javax.swing.JTextField" name="tf_namapp">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
                           </Properties>
@@ -1360,7 +1360,7 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="namabuku3">
+                        <Component class="javax.swing.JTextField" name="tf_bukupp">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
                           </Properties>
@@ -1390,7 +1390,7 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="namabuku4">
+                        <Component class="javax.swing.JTextField" name="tf_jumlahpp">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
                           </Properties>
@@ -1400,7 +1400,7 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton3">
+                        <Component class="javax.swing.JButton" name="btn_batal">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1416,7 +1416,7 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton4">
+                        <Component class="javax.swing.JButton" name="btn_setujui">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1445,7 +1445,7 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="namabuku5">
+                        <Component class="javax.swing.JTextField" name="tf_tglpinjampp">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
                           </Properties>
@@ -1465,7 +1465,7 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="namabuku6">
+                        <Component class="javax.swing.JTextField" name="tf_tenggatpp">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
                           </Properties>
@@ -1475,7 +1475,7 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton5">
+                        <Component class="javax.swing.JButton" name="btn_tolak">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1504,7 +1504,7 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="namabuku7">
+                        <Component class="javax.swing.JTextField" name="tf_tglpp">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
                           </Properties>
