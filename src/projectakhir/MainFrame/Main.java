@@ -688,13 +688,19 @@ public final class Main extends javax.swing.JFrame {
     }
     void show_datapeminjaman(){
         Object[] kolom = {
-            "ID", "Username", "Buku", "Qty", "Tgl Pinjam", "Tgl Tenggat"
+            "ID", "Buku", "Qty", "Tgl Pinjam", "Tgl Tenggat"
         };
         modelpinjam = new DefaultTableModel(null, kolom);
         tbl_datapinjam.setModel(modelpinjam);
         try {
           st = conn.createStatement();
-          rs = st.executeQuery("SELECT transaksi.id_trans, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat FROM transaksi JOIN buku ON buku.id_buku = transaksi.id_buku JOIN user ON user.id_user = transaksi.id_user WHERE transaksi.tgl_kembali IS NULL AND transaksi.id_user = "+id_user);
+          rs = st.executeQuery("SELECT "
+                  + "transaksi.id_trans, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat "
+                  + "FROM transaksi "
+                  + "JOIN buku ON buku.id_buku = transaksi.id_buku "
+                  + "JOIN user ON user.id_user = transaksi.id_user "
+                  + "WHERE transaksi.tgl_kembali IS NULL "
+                  + "AND transaksi.id_user = "+id_user);
           while (rs.next()) {
             Object[] data = {
               rs.getString("id_trans"),
@@ -711,24 +717,31 @@ public final class Main extends javax.swing.JFrame {
     }
     void show_datapeminjaman_diPerpanjangan(){
         Object[] kolom = {
-            "ID", "Username", "Buku", "Qty", "Tgl Pinjam", "Tgl Tenggat"
+            "ID", "Buku", "Qty", "Tgl Pinjam", "Tgl Tenggat"
         };
         modelpinjamdiperpanjangan = new DefaultTableModel(null, kolom);
         tbl_datapinjam1.setModel(modelpinjamdiperpanjangan);
         try {
           st = conn.createStatement();
-          rs = st.executeQuery("SELECT "
-                  + "transaksi.id_trans, user.username, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat, transaksi.tgl_kembali, transaksi.denda "
-                  + "FROM `transaksi`, `buku`, `user`, `perpanjangan` "
-                  + "WHERE user.id_user = transaksi.id_user "
-                  + "AND buku.id_buku = transaksi.id_buku "
-                  + "AND transaksi.id_trans = perpanjangan.id_perpanjangan "
-                  + "AND transaksi.id_user = '"+id_user+"' AND transaksi.tgl_kembali IS NULL "
-                  + "AND perpanjangan.status = 'diproses'");
+//          rs = st.executeQuery("SELECT "
+//                  + "transaksi.id_trans, user.username, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat, transaksi.tgl_kembali, transaksi.denda "
+//                  + "FROM `transaksi`, `buku`, `user`, `perpanjangan` "
+//                  + "WHERE user.id_user = transaksi.id_user "
+//                  + "AND buku.id_buku = transaksi.id_buku "
+//                  + "AND transaksi.id_trans = perpanjangan.id_perpanjangan "
+//                  + "AND transaksi.id_user = '"+id_user+"' AND transaksi.tgl_kembali IS NULL "
+//                  + "AND perpanjangan.status = 'diproses'");
+            rs = st.executeQuery("SELECT "
+                  + "transaksi.id_trans, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat "
+                  + "FROM transaksi "
+                  + "JOIN buku ON buku.id_buku = transaksi.id_buku "
+                  + "JOIN user ON user.id_user = transaksi.id_user "
+                  + "WHERE transaksi.tgl_kembali IS NULL "
+                  + "AND transaksi.id_user = "+id_user);
           while (rs.next()) {
             Object[] data = {
               rs.getString("id_trans"),
-              rs.getString("username"),
+//              rs.getString("username"),
               rs.getString("namabuku"),
               rs.getString("qty"),
               rs.getString("tgl_pinjam"),
@@ -1271,7 +1284,7 @@ public final class Main extends javax.swing.JFrame {
         int selectedRow = tbl_datapinjam.getSelectedRow();
         if (selectedRow != -1) {
             id_trans = tbl_datapinjam.getValueAt(selectedRow, 0).toString();
-            tgl_tenggat = tbl_datapinjam.getValueAt(selectedRow, 5).toString();
+            tgl_tenggat = tbl_datapinjam.getValueAt(selectedRow, 4).toString();
             tf_transaksidipilih.setText(id_trans);
         }
 //        JOptionPane.showMessageDialog(this, tgl_tenggat);
@@ -1319,7 +1332,7 @@ public final class Main extends javax.swing.JFrame {
         int selectedRow = tbl_datapinjam1.getSelectedRow();
         if (selectedRow != -1) {
             id_trans = tbl_datapinjam1.getValueAt(selectedRow, 0).toString();
-            tgl_tenggat = tbl_datapinjam1.getValueAt(selectedRow, 5).toString();
+            tgl_tenggat = tbl_datapinjam1.getValueAt(selectedRow, 4).toString();
             tf_transaksidipilih1.setText(id_trans);
         }
     }//GEN-LAST:event_tbl_datapinjam1MouseClicked

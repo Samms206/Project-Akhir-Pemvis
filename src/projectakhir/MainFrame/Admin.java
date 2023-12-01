@@ -385,6 +385,7 @@ public class Admin extends javax.swing.JFrame {
 
         btnApprove.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         btnApprove.setForeground(new java.awt.Color(255, 255, 255));
+        btnApprove.setText("I");
         btnApprove.setEnabled(false);
         btnApprove.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1102,7 +1103,13 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTransaksiMouseExited
 
     private void btnApproveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApproveMouseClicked
-
+        kananpane.removeAll();
+        kananpane.repaint();
+        kananpane.revalidate();
+        //
+        kananpane.add(Dataperpanjangan);
+        kananpane.repaint();
+        kananpane.revalidate();
     }//GEN-LAST:event_btnApproveMouseClicked
 
     private void btnApproveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApproveMouseEntered
