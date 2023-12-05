@@ -165,7 +165,7 @@ public class Login extends javax.swing.JFrame {
                     int role = rs.getInt("role");
                     if (role == 1) {
                         JOptionPane.showMessageDialog(this, "Login Berhasil sebagai Admin", "Login", JOptionPane.DEFAULT_OPTION);
-                        Admin adminPage = new Admin();
+                        Admin adminPage = new Admin(username, password);
                         adminPage.setVisible(true);
                         this.dispose();
                     } else if (role == 2) {

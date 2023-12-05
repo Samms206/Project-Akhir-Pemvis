@@ -41,6 +41,8 @@ public class Admin extends javax.swing.JFrame {
     private PreparedStatement ps;
     Connection conn = koneksi.Koneksi();
     
+    String emailParam, passParam;
+    
     DefaultTableModel model_anggota = new DefaultTableModel();
     DefaultTableModel model_buku = new DefaultTableModel();
     DefaultTableModel model_pinjam = new DefaultTableModel();
@@ -49,8 +51,11 @@ public class Admin extends javax.swing.JFrame {
     
     String id_buku = "0", id_user = "0";
     
-    public Admin() {
+    public Admin(String email, String pass) {
         initComponents();
+        emailParam = email;
+        passParam = pass;
+        //
         warna();
         refresh();
         enable_false();
@@ -64,6 +69,10 @@ public class Admin extends javax.swing.JFrame {
         styleTable(tbl_pengembalian);
         styleTable(tbl_statusperpanjangan);
         styleTable(table_anggota);
+    }
+
+    private Admin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     void styleTable(JTable tblTest){
         tblTest.setShowHorizontalLines(true);
