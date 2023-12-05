@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import net.sf.jasperreports.engine.JRException;
@@ -58,6 +59,18 @@ public class Admin extends javax.swing.JFrame {
         show_status_perpanjangan();
         btn_setujui.setEnabled(false);
         btn_tolak.setEnabled(false);
+        styleTable(tabel_buku);
+        styleTable(tbl_peminjaman);
+        styleTable(tbl_pengembalian);
+        styleTable(tbl_statusperpanjangan);
+        styleTable(table_anggota);
+    }
+    void styleTable(JTable tblTest){
+        tblTest.setShowHorizontalLines(true);
+        tblTest.setGridColor(new Color(230,230,230));
+        tblTest.setBackground(Color.WHITE);
+        tblTest.setRowHeight(40);
+        tblTest.getTableHeader().setReorderingAllowed(false);
     }
     
     void refresh(){

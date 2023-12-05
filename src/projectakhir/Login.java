@@ -162,23 +162,23 @@ public class Login extends javax.swing.JFrame {
                 ps.setString(2, password);
                 rs = ps.executeQuery();
                 if (rs.next()) {
-                int role = rs.getInt("role");
-                if (role == 1) {
-                    JOptionPane.showMessageDialog(this, "Login Berhasil sebagai Admin", "Login", JOptionPane.DEFAULT_OPTION);
-                    Admin adminPage = new Admin();
-                    adminPage.setVisible(true);
-                    this.dispose();
-                } else if (role == 2) {
-                    JOptionPane.showMessageDialog(this, "Login Berhasil sebagai User", "Login", JOptionPane.DEFAULT_OPTION);
-                    Main userPage = new Main(username, password);
-                    userPage.setVisible(true);
-                    this.dispose();
+                    int role = rs.getInt("role");
+                    if (role == 1) {
+                        JOptionPane.showMessageDialog(this, "Login Berhasil sebagai Admin", "Login", JOptionPane.DEFAULT_OPTION);
+                        Admin adminPage = new Admin();
+                        adminPage.setVisible(true);
+                        this.dispose();
+                    } else if (role == 2) {
+                        JOptionPane.showMessageDialog(this, "Login Berhasil sebagai User", "Login", JOptionPane.DEFAULT_OPTION);
+                        Main userPage = new Main(username, password);
+                        userPage.setVisible(true);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Role tidak valid", "Login", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Role tidak valid", "Login", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Email atau Password Salah!!!", "Login", JOptionPane.ERROR_MESSAGE);
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Email atau Password Salah!!!", "Login", JOptionPane.ERROR_MESSAGE);
-            }
             } catch (HeadlessException | SQLException e) {
                 JOptionPane.showMessageDialog(this, "fail " + e.getMessage());
             }
