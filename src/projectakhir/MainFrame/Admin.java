@@ -240,7 +240,19 @@ public class Admin extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
-    
+    void show_dataAdmin(){
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery("SELECT*FROM user WHERE email='"+emailParam+"' AND password='"+passParam+"' AND role=1");
+            if (rs.next()) {
+                tf_user.setText(rs.getString("username"));
+                tf_email.setText(rs.getString("email"));
+                tf_pass2.setText(rs.getString("password"));
+            }
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
