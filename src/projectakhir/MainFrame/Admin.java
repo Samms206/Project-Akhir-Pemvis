@@ -62,6 +62,7 @@ public class Admin extends javax.swing.JFrame {
         show_datapeminjaman();
         show_datapengembalian();
         show_status_perpanjangan();
+        show_dataAdmin();
         btn_setujui.setEnabled(false);
         btn_tolak.setEnabled(false);
         styleTable(tabel_buku);
