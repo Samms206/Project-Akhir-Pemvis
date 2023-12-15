@@ -7,6 +7,7 @@ package projectakhir.MainFrame;
 
 import controller.koneksi;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +17,7 @@ import java.sql.Statement;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import net.sf.jasperreports.engine.JRException;
@@ -80,9 +82,26 @@ public class Admin extends javax.swing.JFrame {
         tblTest.setGridColor(new Color(230,230,230));
         tblTest.setBackground(Color.WHITE);
         tblTest.setRowHeight(40);
+        tblTest.setOpaque(false);
         tblTest.getTableHeader().setReorderingAllowed(false);
+        tblTest.getTableHeader().setBackground(Color.white);
+        tblTest.getTableHeader().setDefaultRenderer(new HeaderColor());
     }
-    
+    public class HeaderColor extends DefaultTableCellRenderer {
+
+        public HeaderColor() {
+            setOpaque(true);
+        }
+
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean selected, boolean focused, int row, int column) {
+            super.getTableCellRendererComponent(table, value, selected, focused, row, column);
+
+            setBackground(new java.awt.Color(255,255,255));
+            setBorder(noFocusBorder);
+            return this;
+        }
+
+    }
     void refresh(){
         show_buku();
         show_user();

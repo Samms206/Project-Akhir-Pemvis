@@ -7,6 +7,7 @@ package projectakhir.MainFrame;
 
 import controller.koneksi;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.HeadlessException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -25,6 +26,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -54,7 +57,7 @@ public final class Main extends javax.swing.JFrame {
     DefaultTableModel modelpinjam = new DefaultTableModel();
     DefaultTableModel modelpinjamdiperpanjangan = new DefaultTableModel();
     DefaultTableModel modelhistory = new DefaultTableModel();
-        DefaultTableModel modelstatusperpanjangan = new DefaultTableModel();
+    DefaultTableModel modelstatusperpanjangan = new DefaultTableModel();
 
 
 
@@ -77,6 +80,11 @@ public final class Main extends javax.swing.JFrame {
         show_history_datapeminjaman();
         show_statusPerpanjangan();
         show_datapeminjaman_diPerpanjangan();
+        styleTable(tbl_buku);
+        styleTable(tbl_datapinjam);
+        styleTable(tbl_datapinjam1);
+        styleTable(tbl_datapinjamhistory);
+        styleTable(tbl_statusperpanjangan);
     }
 
     private Main() {
@@ -655,6 +663,32 @@ public final class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    void styleTable(JTable tblTest){
+        tblTest.setShowHorizontalLines(true);
+        tblTest.setGridColor(new Color(230,230,230));
+        tblTest.setBackground(Color.WHITE);
+        tblTest.setRowHeight(40);
+        tblTest.setOpaque(false);
+        tblTest.getTableHeader().setReorderingAllowed(false);
+        tblTest.getTableHeader().setBackground(Color.white);
+        tblTest.getTableHeader().setDefaultRenderer(new HeaderColor());
+    }
+    public class HeaderColor extends DefaultTableCellRenderer {
+
+        public HeaderColor() {
+            setOpaque(true);
+        }
+
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean selected, boolean focused, int row, int column) {
+            super.getTableCellRendererComponent(table, value, selected, focused, row, column);
+
+            setBackground(new java.awt.Color(255,255,255));
+            setBorder(noFocusBorder);
+            return this;
+        }
+
+    }
+    
     void show_history_datapeminjaman(){
         Object[] kolom = {
             "ID","Buku", "Qty", "Tgl Pinjam", "Tgl Tenggat", "Tgl Kembali", "Denda", "Status"
@@ -1006,8 +1040,7 @@ public final class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_batalActionPerformed
 
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
-        // TODO add your handling code here:
-        enable_true();
+        // TODO add your handling code here:     
         if (btn_simpan.getText().equals("Simpan")) {
             if (tf_namalengkap.getText().equals("") 
                 || tf_nim.getText().equals("") 
@@ -1017,7 +1050,7 @@ public final class Main extends javax.swing.JFrame {
                 || tf_konfirmpassword.getText().equals("")
                 || !isValidEmail(tf_email.getText())) {
                 JOptionPane.showMessageDialog(this, "Form masih kosong atau data tidak valid");
-            }else{
+            }else{ 
                 if (tf_password.getText().equals(tf_konfirmpassword.getText())) {
                     try {
                         String query = "UPDATE user SET "
@@ -1040,8 +1073,9 @@ public final class Main extends javax.swing.JFrame {
                 }else{
                     JOptionPane.showMessageDialog(this, "Password tidak sama!");
                 }
-                
             }
+        }else{
+            enable_true();
         }
     }//GEN-LAST:event_btn_simpanActionPerformed
 
