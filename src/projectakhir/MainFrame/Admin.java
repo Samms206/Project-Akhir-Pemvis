@@ -1076,6 +1076,11 @@ public class Admin extends javax.swing.JFrame {
         btn_setujui.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btn_setujui.setForeground(new java.awt.Color(0, 204, 51));
         btn_setujui.setText("Setujui");
+        btn_setujui.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_setujuiActionPerformed(evt);
+            }
+        });
         jPanel3.add(btn_setujui, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, 190, 40));
 
         jLabel38.setText("Tanggal Pinjam");
@@ -1813,9 +1818,7 @@ public class Admin extends javax.swing.JFrame {
             tf_tglpp.setText(tbl_statusperpanjangan.getValueAt(selectedRow, 6).toString());
         }
     }//GEN-LAST:event_tbl_statusperpanjanganMouseClicked
-
-    private void btn_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batalActionPerformed
-        // TODO add your handling code here:
+    void clear_pp(){
         tf_idpp.setText("");
         tf_namapp.setText("");
         tf_bukupp.setText("");
@@ -1825,6 +1828,10 @@ public class Admin extends javax.swing.JFrame {
         tf_tglpp.setText("");
         btn_setujui.setEnabled(false);
         btn_tolak.setEnabled(false);
+    }
+    private void btn_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batalActionPerformed
+        // TODO add your handling code here:
+        clear_pp();
     }//GEN-LAST:event_btn_batalActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1832,6 +1839,21 @@ public class Admin extends javax.swing.JFrame {
         enable_false();
         btn_ubah.setText("Update");
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btn_setujuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_setujuiActionPerformed
+        // TODO add your handling code here:
+        try {
+            String sql = "UPDATE perpanjangan SET status=? WHERE id_perpanjangan=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "disetujui");
+            ps.setString(2, tf_idpp.getText());
+            ps.executeUpdate();
+            clear_pp();
+            show_status_perpanjangan();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_btn_setujuiActionPerformed
 
     /**
      * @param args the command line arguments
