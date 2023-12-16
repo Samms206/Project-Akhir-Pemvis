@@ -113,6 +113,10 @@ public class Admin extends javax.swing.JFrame {
         tf_nohpUser.setEnabled(false);
         tf_passUser.setEnabled(false);
         cmb_role.setEnabled(false);
+        tf_user.setEnabled(false);
+        tf_email.setEnabled(false);
+        tf_pass.setEnabled(false);
+        tf_pass2.setEnabled(false);
     }
     void enable_true(){
         tf_namaUser.setEnabled(true);
@@ -121,6 +125,10 @@ public class Admin extends javax.swing.JFrame {
         tf_nohpUser.setEnabled(true);
         tf_passUser.setEnabled(true);
         cmb_role.setEnabled(true);
+        tf_user.setEnabled(true);
+        tf_email.setEnabled(true);
+        tf_pass.setEnabled(true);
+        tf_pass2.setEnabled(true);
     }
     void show_buku(){
         Object[] kolom = {
@@ -307,6 +315,7 @@ public class Admin extends javax.swing.JFrame {
         input = new javax.swing.JLabel();
         tf_pass = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         Anggotapane = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_anggota = new javax.swing.JTable();
@@ -593,6 +602,16 @@ public class Admin extends javax.swing.JFrame {
         });
         Profilepane.add(tf_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 570, 30));
         Profilepane.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton3.setText("Batal");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        Profilepane.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(487, 290, 110, 40));
 
         kananpane.add(Profilepane, "card3");
 
@@ -1273,20 +1292,27 @@ public class Admin extends javax.swing.JFrame {
 
     private void btn_ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ubahActionPerformed
         // TODO add your handling code here:
-        if (tf_pass2.getText() == null ? tf_pass.getText() != null : !tf_pass2.getText().equals(tf_pass.getText())) {
-            JOptionPane.showMessageDialog(this, "password tidak sama!!");
+        
+        if ("Update".equals(btn_ubah.getText())) {
+            enable_true();
+            btn_ubah.setText("Simpan");
         }else{
-            try {
-                String sql = "UPDATE admin SET username=?,password=?,email=?,gambar=?";
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, tf_user.getText());
-                ps.setString(2, tf_pass2.getText());
-                ps.setString(3, tf_email.getText());
-                ps.executeUpdate();
-                this.dispose();
-            } catch (HeadlessException | SQLException e) {
-                JOptionPane.showMessageDialog(this, "gagal"+e.getMessage());
-
+            if (tf_pass2.getText() == null ? tf_pass.getText() != null : !tf_pass2.getText().equals(tf_pass.getText())) {
+                JOptionPane.showMessageDialog(this, "password tidak sama!!");
+            }else{
+                try {
+                    String sql = "UPDATE user SET username=?,password=?,email=?";
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.setString(1, tf_user.getText());
+                    ps.setString(2, tf_pass2.getText());
+                    ps.setString(3, tf_email.getText());
+                    ps.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Data Berhasil di Update!");
+                    btn_ubah.setText("Simpan");
+                    enable_false();
+                } catch (HeadlessException | SQLException e) {
+                    JOptionPane.showMessageDialog(this, "gagal"+e.getMessage());
+                }
             }
         }
     }//GEN-LAST:event_btn_ubahActionPerformed
@@ -1801,6 +1827,12 @@ public class Admin extends javax.swing.JFrame {
         btn_tolak.setEnabled(false);
     }//GEN-LAST:event_btn_batalActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        enable_false();
+        btn_ubah.setText("Update");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1860,6 +1892,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel input;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
