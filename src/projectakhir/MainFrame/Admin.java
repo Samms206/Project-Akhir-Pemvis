@@ -1099,6 +1099,11 @@ public class Admin extends javax.swing.JFrame {
         btn_tolak.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btn_tolak.setForeground(new java.awt.Color(255, 0, 0));
         btn_tolak.setText("Tolak");
+        btn_tolak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tolakActionPerformed(evt);
+            }
+        });
         jPanel3.add(btn_tolak, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, 110, 40));
 
         jLabel40.setText("Tanggal Perpanjang");
@@ -1854,6 +1859,21 @@ public class Admin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_btn_setujuiActionPerformed
+
+    private void btn_tolakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tolakActionPerformed
+        // TODO add your handling code here:
+        try {
+            String sql = "UPDATE perpanjangan SET status=? WHERE id_perpanjangan=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "ditolak");
+            ps.setString(2, tf_idpp.getText());
+            ps.executeUpdate();
+            clear_pp();
+            show_status_perpanjangan();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_btn_tolakActionPerformed
 
     /**
      * @param args the command line arguments
