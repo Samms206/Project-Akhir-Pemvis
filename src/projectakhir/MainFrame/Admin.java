@@ -296,8 +296,8 @@ public class Admin extends javax.swing.JFrame {
         btnAnggota = new javax.swing.JLabel();
         btnLibrary = new javax.swing.JLabel();
         btnTransaksi = new javax.swing.JLabel();
-        btnApprove = new javax.swing.JLabel();
         btnLogout = new javax.swing.JLabel();
+        btnApprove = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         kananpane = new javax.swing.JPanel();
         gambar = new javax.swing.JLabel();
@@ -477,23 +477,6 @@ public class Admin extends javax.swing.JFrame {
         });
         kiri.add(btnTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 393, 223, 40));
 
-        btnApprove.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
-        btnApprove.setForeground(new java.awt.Color(255, 255, 255));
-        btnApprove.setText("I");
-        btnApprove.setEnabled(false);
-        btnApprove.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnApproveMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnApproveMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnApproveMouseEntered(evt);
-            }
-        });
-        kiri.add(btnApprove, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 451, 223, 40));
-
         btnLogout.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(255, 255, 255));
         btnLogout.setText("I");
@@ -510,7 +493,23 @@ public class Admin extends javax.swing.JFrame {
         });
         kiri.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 520, 223, 40));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/kiri_admin.jpg"))); // NOI18N
+        btnApprove.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
+        btnApprove.setForeground(new java.awt.Color(255, 255, 255));
+        btnApprove.setText("I");
+        btnApprove.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnApproveMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnApproveMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnApproveMouseEntered(evt);
+            }
+        });
+        kiri.add(btnApprove, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 210, 40));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/kiri_admin.jpeg"))); // NOI18N
         kiri.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 600));
 
         MainPanel.add(kiri, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -1228,26 +1227,6 @@ public class Admin extends javax.swing.JFrame {
         btnTransaksi.setForeground(new Color(37,51,60));
     }//GEN-LAST:event_btnTransaksiMouseExited
 
-    private void btnApproveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApproveMouseClicked
-        kananpane.removeAll();
-        kananpane.repaint();
-        kananpane.revalidate();
-        //
-        kananpane.add(Dataperpanjangan);
-        kananpane.repaint();
-        kananpane.revalidate();
-    }//GEN-LAST:event_btnApproveMouseClicked
-
-    private void btnApproveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApproveMouseEntered
-        // TODO add your handling code here:
-        btnApprove.setForeground(Color.WHITE);
-    }//GEN-LAST:event_btnApproveMouseEntered
-
-    private void btnApproveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApproveMouseExited
-        // TODO add your handling code here:
-        btnApprove.setForeground(new Color(37,51,60));
-    }//GEN-LAST:event_btnApproveMouseExited
-
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
         // TODO add your handling code here:
         int opsi = JOptionPane.showConfirmDialog(null, "Apakah anda ingin Keluar ?");
@@ -1887,6 +1866,27 @@ public class Admin extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btn_tolakActionPerformed
+
+    private void btnApproveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApproveMouseClicked
+        // TODO add your handling code here:
+        kananpane.removeAll();
+        kananpane.repaint();
+        kananpane.revalidate();
+        //
+        kananpane.add(Dataperpanjangan);
+        kananpane.repaint();
+        kananpane.revalidate();
+    }//GEN-LAST:event_btnApproveMouseClicked
+
+    private void btnApproveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApproveMouseEntered
+        // TODO add your handling code here:
+        btnApprove.setForeground(Color.white);
+    }//GEN-LAST:event_btnApproveMouseEntered
+
+    private void btnApproveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApproveMouseExited
+        // TODO add your handling code here:
+        btnApprove.setForeground(new Color(0,0,0,0));
+    }//GEN-LAST:event_btnApproveMouseExited
 
     /**
      * @param args the command line arguments
