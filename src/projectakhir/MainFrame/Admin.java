@@ -43,7 +43,7 @@ public class Admin extends javax.swing.JFrame {
     private PreparedStatement ps;
     Connection conn = koneksi.Koneksi();
     
-    String emailParam, passParam;
+    String emailParam, passParam, status;
     
     DefaultTableModel model_anggota = new DefaultTableModel();
     DefaultTableModel model_buku = new DefaultTableModel();
@@ -759,6 +759,7 @@ public class Admin extends javax.swing.JFrame {
         jLabel31.setText("Role");
         Anggotapane.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 50, -1));
 
+        cmb_role.setBackground(new java.awt.Color(255, 255, 255));
         cmb_role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--pilh role--", "User", "Admin" }));
         Anggotapane.add(cmb_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, 270, -1));
 
@@ -875,6 +876,7 @@ public class Admin extends javax.swing.JFrame {
         });
         Daftarbuku.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, 330, 40));
 
+        thnterbit.setBackground(new java.awt.Color(255, 255, 255));
         thnterbit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---Pilih Tahun---", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1900-an", " " }));
         Daftarbuku.add(thnterbit, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 300, 130, 30));
 
@@ -1821,6 +1823,7 @@ public class Admin extends javax.swing.JFrame {
             tf_tglpinjampp.setText(tbl_statusperpanjangan.getValueAt(selectedRow, 4).toString());
             tf_tenggatpp.setText(tbl_statusperpanjangan.getValueAt(selectedRow, 5).toString());
             tf_tglpp.setText(tbl_statusperpanjangan.getValueAt(selectedRow, 6).toString());
+            status = tbl_statusperpanjangan.getValueAt(selectedRow, 7).toString();
         }
     }//GEN-LAST:event_tbl_statusperpanjanganMouseClicked
     void clear_pp(){
@@ -1847,32 +1850,42 @@ public class Admin extends javax.swing.JFrame {
 
     private void btn_setujuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_setujuiActionPerformed
         // TODO add your handling code here:
-        try {
-            String sql = "UPDATE perpanjangan SET status=? WHERE id_perpanjangan=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, "disetujui");
-            ps.setString(2, tf_idpp.getText());
-            ps.executeUpdate();
-            clear_pp();
-            show_status_perpanjangan();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+        if ("disetujui".equals(status) || "ditolak".equals(status)) {
+            JOptionPane.showMessageDialog(this, "Sudah disetujui!");
+        }else{
+            try {
+                String sql = "UPDATE perpanjangan SET status=? WHERE id_perpanjangan=?";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setString(1, "disetujui");
+                ps.setString(2, tf_idpp.getText());
+                ps.executeUpdate();
+                clear_pp();
+                show_status_perpanjangan();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
         }
+        
     }//GEN-LAST:event_btn_setujuiActionPerformed
 
     private void btn_tolakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tolakActionPerformed
         // TODO add your handling code here:
-        try {
-            String sql = "UPDATE perpanjangan SET status=? WHERE id_perpanjangan=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, "ditolak");
-            ps.setString(2, tf_idpp.getText());
-            ps.executeUpdate();
-            clear_pp();
-            show_status_perpanjangan();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+        if ("ditolak".equals(status) || "disetujui".equals(status)) {
+            JOptionPane.showMessageDialog(this, "Tidak dapat mengubah status lagi!");
+        }else{
+            try {
+                String sql = "UPDATE perpanjangan SET status=? WHERE id_perpanjangan=?";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setString(1, "ditolak");
+                ps.setString(2, tf_idpp.getText());
+                ps.executeUpdate();
+                clear_pp();
+                show_status_perpanjangan();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
         }
+        
     }//GEN-LAST:event_btn_tolakActionPerformed
 
     /**
