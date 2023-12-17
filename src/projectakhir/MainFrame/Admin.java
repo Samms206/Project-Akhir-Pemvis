@@ -1625,19 +1625,15 @@ public class Admin extends javax.swing.JFrame {
 
     private void jToggleButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton10ActionPerformed
         // TODO add your handling code here:
-//        JasperReport reports;
-//        String lokasifile = "C:\\Program Files (x86)\\Dreams Team\\Libeeo\\src\\reportEdu\\buku_libeeo.jasper";
-//        try {
-//            reports = (JasperReport) JRLoader.loadObjectFromFile(lokasifile);
-//            JasperPrint jprint = JasperFillManager.fillReport(lokasifile, null, conn);
-//            JasperViewer jview = new JasperViewer(jprint, false);
-//            jview.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//            jview.setVisible(true);
-//
-//        } catch (JRException e) {
-//            JOptionPane.showMessageDialog(this, "Report GAGAL karena "+e.getMessage());
-//        }
-
+        try {
+            String path = "src/Report/data_buku.jrxml";
+            HashMap hash = new HashMap();
+            JasperReport jrpt = JasperCompileManager.compileReport(path);
+            JasperPrint jprint = JasperFillManager.fillReport(jrpt, hash, conn);
+            JasperViewer.viewReport(jprint, false);
+        } catch (JRException e) {
+            System.out.println("error : " + e.getMessage());
+        }
     }//GEN-LAST:event_jToggleButton10ActionPerformed
 
     private void btn_tambahbukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahbukuActionPerformed
