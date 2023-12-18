@@ -105,6 +105,8 @@ public class Admin extends javax.swing.JFrame {
     void refresh(){
         show_buku();
         show_user();
+        id_buku = "0";
+        id_user = "0";
     }
     void enable_false(){
         tf_namaUser.setEnabled(false);
@@ -401,8 +403,6 @@ public class Admin extends javax.swing.JFrame {
         btn_tolak = new javax.swing.JButton();
         jLabel40 = new javax.swing.JLabel();
         tf_tglpp = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -680,7 +680,8 @@ public class Admin extends javax.swing.JFrame {
         jLabel23.setText("NIM");
         Anggotapane.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 345, 50, -1));
 
-        jToggleButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jToggleButton1.setBackground(new java.awt.Color(255, 0, 0));
+        jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
         jToggleButton1.setText("Hapus");
         jToggleButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -1115,15 +1116,6 @@ public class Admin extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Data Perpanjangan", jPanel3);
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel9.setText("History Perpanjangan_____");
-        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 370, 40));
-
-        jTabbedPane2.addTab("History Perpanjangan", jPanel4);
-
         Dataperpanjangan.add(jTabbedPane2, "card2");
 
         kananpane.add(Dataperpanjangan, "card6");
@@ -1411,25 +1403,27 @@ public class Admin extends javax.swing.JFrame {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-        try {
-            int opsi = JOptionPane.showConfirmDialog(null, "Benarkah anda ingin menghapus data ini ?");
-            switch(opsi){
-                case JOptionPane.YES_OPTION:
-                    String sql = "DELETE FROM user WHERE id_user ="+id_user ;
-                    PreparedStatement ps = conn.prepareStatement(sql);
-                    ps.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
-                    break;
-                case JOptionPane.NO_OPTION:
-                    break;
-                default:
-                    break;
+        if ("0".equals(id_user)) {
+            JOptionPane.showMessageDialog(this, "Belum ada data yang dipilih!");
+        }else{
+            try {
+                int opsi = JOptionPane.showConfirmDialog(null, "Benarkah anda ingin menghapus data ini ?");
+                switch(opsi){
+                    case JOptionPane.YES_OPTION:
+                        String sql = "DELETE FROM user WHERE id_user ="+id_user ;
+                        PreparedStatement ps = conn.prepareStatement(sql);
+                        ps.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
+                        break;
+                    case JOptionPane.NO_OPTION:
+                        break;
+                    default:
+                        break;
+                }
+                refresh();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
-            refresh();
-//            bersih();
-//            dataanggota();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -1489,8 +1483,6 @@ public class Admin extends javax.swing.JFrame {
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(this, "Berhasil Mengupdate data User");
                 refresh();
-//                bersih();
-//                dataanggota();
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(this, "Gagal Mengupdate data User"+e.getMessage());
             }
@@ -1976,11 +1968,9 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

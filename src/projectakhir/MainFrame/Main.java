@@ -1253,7 +1253,6 @@ public final class Main extends javax.swing.JFrame {
     private void btn_perpanjangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_perpanjangActionPerformed
         // TODO add your handling code here:
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        
         //
         try {
             String checkNIMQuery = "SELECT * FROM transaksi WHERE id_trans=?";
