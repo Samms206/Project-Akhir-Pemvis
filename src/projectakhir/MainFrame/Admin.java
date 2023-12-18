@@ -46,7 +46,7 @@ public class Admin extends javax.swing.JFrame {
     private PreparedStatement ps;
     Connection conn = koneksi.Koneksi();
     
-    String emailParam, passParam, status;
+    String emailParam, passParam, status, idt;
     
     DefaultTableModel model_anggota = new DefaultTableModel();
     DefaultTableModel model_buku = new DefaultTableModel();
@@ -248,14 +248,14 @@ public class Admin extends javax.swing.JFrame {
     }
     void show_status_perpanjangan(){
         Object[] kolom = {
-            "ID", "Username", "Buku", "Qty", "Tgl Pinjam", "Tgl Tenggat", "Tgl Perpanjangan", "Status"
+            "ID", "Username", "Buku", "Qty", "Tgl Pinjam", "Tgl Tenggat", "Tgl Perpanjangan", "Status", "IDt"
         };
         model_statuspp = new DefaultTableModel(null, kolom);
         tbl_statusperpanjangan.setModel(model_statuspp);
         tbl_statusperpanjangan.setModel(model_statuspp);
         try {
           st = conn.createStatement();
-          rs = st.executeQuery("SELECT perpanjangan.id_perpanjangan as id, user.username, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, perpanjangan.tgl_tenggat_lama, perpanjangan.tgl_perpanjangan, perpanjangan.status FROM perpanjangan,transaksi,buku,user where perpanjangan.id_trans = transaksi.id_trans AND transaksi.id_user = user.id_user AND transaksi.id_buku = buku.id_buku");
+          rs = st.executeQuery("SELECT perpanjangan.id_perpanjangan as id, user.username, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, perpanjangan.tgl_tenggat_lama, perpanjangan.tgl_perpanjangan, perpanjangan.status, transaksi.id_trans as idt FROM perpanjangan,transaksi,buku,user where perpanjangan.id_trans = transaksi.id_trans AND transaksi.id_user = user.id_user AND transaksi.id_buku = buku.id_buku");
           while (rs.next()) {
             Object[] data = {
               rs.getString("id"),
@@ -265,7 +265,8 @@ public class Admin extends javax.swing.JFrame {
               rs.getString("tgl_pinjam"),
               rs.getString("tgl_tenggat_lama"),
               rs.getString("tgl_perpanjangan"),
-              rs.getString("status")
+              rs.getString("status"),
+              rs.getString("idt")
             };
               model_statuspp.addRow(data);
           }
@@ -1815,6 +1816,7 @@ public class Admin extends javax.swing.JFrame {
             tf_tenggatpp.setText(tbl_statusperpanjangan.getValueAt(selectedRow, 5).toString());
             tf_tglpp.setText(tbl_statusperpanjangan.getValueAt(selectedRow, 6).toString());
             status = tbl_statusperpanjangan.getValueAt(selectedRow, 7).toString();
+            idt = tbl_statusperpanjangan.getValueAt(selectedRow, 8).toString();
         }
     }//GEN-LAST:event_tbl_statusperpanjanganMouseClicked
     void clear_pp(){
@@ -1852,7 +1854,12 @@ public class Admin extends javax.swing.JFrame {
                 calendar.add(Calendar.DAY_OF_MONTH, 10);
                 Date tanggalSetelahDitambahkan = calendar.getTime();
                 String tgl = sdf.format(tanggalSetelahDitambahkan);
-                
+                //
+                String query = "UPDATE transaksi SET tgl_tenggat=?, status=NULL WHERE id_trans=?";
+                ps = conn.prepareStatement(query);
+                ps.setString(1, tgl);
+                ps.setString(2, idt);
+                ps.executeUpdate();
                 //
                 String sql = "UPDATE perpanjangan SET status=?, tgl_tenggat_baru=? WHERE id_perpanjangan=?";
                 ps = conn.prepareStatement(sql);
