@@ -857,7 +857,8 @@ public class Admin extends javax.swing.JFrame {
         });
         Daftarbuku.add(jToggleButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, 80, 40));
 
-        jToggleButton13.setBackground(new java.awt.Color(255, 255, 255));
+        jToggleButton13.setBackground(new java.awt.Color(255, 0, 0));
+        jToggleButton13.setForeground(new java.awt.Color(255, 255, 255));
         jToggleButton13.setText("Hapus");
         jToggleButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1642,7 +1643,7 @@ public class Admin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Tahun Masih Kosong!!!");
         }else{
             try {
-                String sql = "INSERT INTO buku(namabuku,penulis,stok,penerbit,tahun_terbit) values (?,?,?,?,?,?)";
+                String sql = "INSERT INTO buku(namabuku,penulis,stok,penerbit,tahun_terbit) values (?,?,?,?,?)";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setString(1, namabuku.getText());
                 ps.setString(2, pengarangbuku.getText());
@@ -1652,8 +1653,7 @@ public class Admin extends javax.swing.JFrame {
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(this, "Berhasil Menambahkan Buku Baru");
                 model_buku.setRowCount(0);
-//                bersih();
-//                databuku();
+                refresh();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Gagal Menambahkan Buku "+e);
             }
@@ -1683,25 +1683,28 @@ public class Admin extends javax.swing.JFrame {
 
     private void jToggleButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton13ActionPerformed
         // TODO add your handling code here:
-        try {
-            int opsi = JOptionPane.showConfirmDialog(null, "Benarkah anda ingin menghapus data ini ?");
-            switch(opsi){
-                case JOptionPane.YES_OPTION:
-                    String sql = "DELETE FROM buku where id_buku ="+id_buku ;
-                    PreparedStatement ps = conn.prepareStatement(sql);
-                    ps.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
-                    model_buku.setRowCount(0);
-    //                bersih();
-    //                databuku();
-                    break;
-                case JOptionPane.NO_OPTION:
-                    break;
-                default:
-                    break;
-            }
+        if (id_buku.equals("0")) {
+            JOptionPane.showMessageDialog(this, "Belum ada data yang dipilih");
+        }else{
+            try {
+                int opsi = JOptionPane.showConfirmDialog(null, "Benarkah anda ingin menghapus data ini ?");
+                switch(opsi){
+                    case JOptionPane.YES_OPTION:
+                        String sql = "DELETE FROM buku where id_buku ="+id_buku ;
+                        PreparedStatement ps = conn.prepareStatement(sql);
+                        ps.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
+                        model_buku.setRowCount(0);
+                        refresh();
+                        break;
+                    case JOptionPane.NO_OPTION:
+                        break;
+                    default:
+                        break;
+                }
 
-        } catch (Exception e) {
+            } catch (Exception e) {
+            }
         }
     }//GEN-LAST:event_jToggleButton13ActionPerformed
 
