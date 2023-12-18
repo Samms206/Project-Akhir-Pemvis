@@ -628,6 +628,7 @@ public class Admin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table_anggota.setSelectionBackground(new java.awt.Color(204, 204, 204));
         table_anggota.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 table_anggotaMouseClicked(evt);
@@ -779,6 +780,7 @@ public class Admin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabel_buku.setSelectionBackground(new java.awt.Color(204, 204, 204));
         tabel_buku.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabel_bukuMouseClicked(evt);
@@ -896,6 +898,7 @@ public class Admin extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tbl_peminjaman.setSelectionBackground(new java.awt.Color(204, 204, 204));
         tbl_peminjaman.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_peminjamanMouseClicked(evt);
@@ -1032,6 +1035,7 @@ public class Admin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_statusperpanjangan.setSelectionBackground(new java.awt.Color(204, 204, 204));
         tbl_statusperpanjangan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_statusperpanjanganMouseClicked(evt);
@@ -1415,6 +1419,8 @@ public class Admin extends javax.swing.JFrame {
                         PreparedStatement ps = conn.prepareStatement(sql);
                         ps.executeUpdate();
                         JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
+                        refresh();
+                        clear();
                         break;
                     case JOptionPane.NO_OPTION:
                         break;
@@ -1484,6 +1490,7 @@ public class Admin extends javax.swing.JFrame {
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(this, "Berhasil Mengupdate data User");
                 refresh();
+                clear();
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(this, "Gagal Mengupdate data User"+e.getMessage());
             }
@@ -1536,8 +1543,7 @@ public class Admin extends javax.swing.JFrame {
                     refresh();
                     enable_false();
                     btn_tambahUser.setText("Tambah");
-    //                bersih();
-    //                dataanggota();
+                    clear();
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Gagal Menambahkan User "+e.getMessage());
                 }

@@ -354,6 +354,7 @@ public final class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_buku.setSelectionBackground(new java.awt.Color(204, 204, 204));
         tbl_buku.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_bukuMouseClicked(evt);
@@ -455,6 +456,7 @@ public final class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_datapinjamhistory.setSelectionBackground(new java.awt.Color(204, 204, 204));
         tbl_datapinjamhistory.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_datapinjamhistoryMouseClicked(evt);
@@ -500,6 +502,7 @@ public final class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_datapinjam.setSelectionBackground(new java.awt.Color(204, 204, 204));
         tbl_datapinjam.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_datapinjamMouseClicked(evt);
@@ -572,6 +575,7 @@ public final class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_statusperpanjangan.setSelectionBackground(new java.awt.Color(204, 204, 204));
         tbl_statusperpanjangan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_statusperpanjanganMouseClicked(evt);
@@ -629,6 +633,7 @@ public final class Main extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_datapinjam1.setSelectionBackground(new java.awt.Color(204, 204, 204));
         tbl_datapinjam1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_datapinjam1MouseClicked(evt);
@@ -1271,10 +1276,6 @@ public final class Main extends javax.swing.JFrame {
             Date dateKembali = sdf.parse(tglhari_ini);
             long selisihMillis = dateKembali.getTime() - dateTenggat.getTime();
             long selisihHari = TimeUnit.DAYS.convert(selisihMillis, TimeUnit.MILLISECONDS);
-//            System.out.println("tgl hari ini " + tglhari_ini);
-//            System.out.println("tgl tenggat " + tgl_tenggat);
-            System.out.println("selisih " + selisihHari);
-            System.out.println("tgl tenggat lama " + tgl_tenggat_lama);
             if (selisihHari >= -2 && selisihHari <= 0) {
                 try {
                     String query = "INSERT INTO perpanjangan(id_trans,tgl_perpanjangan,tgl_tenggat_lama) "
