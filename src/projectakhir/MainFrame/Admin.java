@@ -14,6 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -1842,10 +1845,20 @@ public class Admin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Sudah disetujui!");
         }else{
             try {
-                String sql = "UPDATE perpanjangan SET status=? WHERE id_perpanjangan=?";
-                PreparedStatement ps = conn.prepareStatement(sql);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date tanggal = sdf.parse(tf_tenggatpp.getText());
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(tanggal);
+                calendar.add(Calendar.DAY_OF_MONTH, 10);
+                Date tanggalSetelahDitambahkan = calendar.getTime();
+                String tgl = sdf.format(tanggalSetelahDitambahkan);
+                
+                //
+                String sql = "UPDATE perpanjangan SET status=?, tgl_tenggat_baru=? WHERE id_perpanjangan=?";
+                ps = conn.prepareStatement(sql);
                 ps.setString(1, "disetujui");
-                ps.setString(2, tf_idpp.getText());
+                ps.setString(2, tgl);
+                ps.setString(3, tf_idpp.getText());
                 ps.executeUpdate();
                 clear_pp();
                 show_status_perpanjangan();
