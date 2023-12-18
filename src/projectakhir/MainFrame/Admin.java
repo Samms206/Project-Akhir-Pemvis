@@ -1629,6 +1629,19 @@ public class Admin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jToggleButton10ActionPerformed
 
+    void clear(){
+        namabuku.setText("");
+        pengarangbuku.setText("");
+        stokbuku.setText("");
+        penerbitbuku.setText("");
+        thnterbit.setSelectedIndex(0);
+        tf_namaUser.setText("");
+        tf_emailUser.setText("");
+        tf_nohpUser.setText("");
+        tf_passUser.setText("");
+        tf_nimUser.setText("");
+        cmb_role.setSelectedIndex(0);
+    }
     private void btn_tambahbukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahbukuActionPerformed
         // TODO add your handling code here:
         if (namabuku.getText().length() == 0) {
@@ -1654,6 +1667,7 @@ public class Admin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Berhasil Menambahkan Buku Baru");
                 model_buku.setRowCount(0);
                 refresh();
+                clear();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Gagal Menambahkan Buku "+e);
             }
@@ -1674,8 +1688,8 @@ public class Admin extends javax.swing.JFrame {
             ps.executeUpdate();
             JOptionPane.showMessageDialog(this, "Berhasil Mengubah Data Buku");
             model_buku.setRowCount(0);
-//            bersih();
-//            databuku();
+            refresh();
+            clear();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Gagal !!! "+e);
         }
@@ -1696,6 +1710,7 @@ public class Admin extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
                         model_buku.setRowCount(0);
                         refresh();
+                        clear();
                         break;
                     case JOptionPane.NO_OPTION:
                         break;
