@@ -762,21 +762,13 @@ public final class Main extends javax.swing.JFrame {
         tbl_datapinjam1.setModel(modelpinjamdiperpanjangan);
         try {
           st = conn.createStatement();
-//          rs = st.executeQuery("SELECT "
-//                  + "transaksi.id_trans, user.username, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat, transaksi.tgl_kembali, transaksi.denda "
-//                  + "FROM `transaksi`, `buku`, `user`, `perpanjangan` "
-//                  + "WHERE user.id_user = transaksi.id_user "
-//                  + "AND buku.id_buku = transaksi.id_buku "
-//                  + "AND transaksi.id_trans = perpanjangan.id_perpanjangan "
-//                  + "AND transaksi.id_user = '"+id_user+"' AND transaksi.tgl_kembali IS NULL "
-//                  + "AND perpanjangan.status = 'diproses'");
-            rs = st.executeQuery("SELECT "
-                  + "transaksi.id_trans, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat "
-                  + "FROM transaksi "
-                  + "JOIN buku ON buku.id_buku = transaksi.id_buku "
-                  + "JOIN user ON user.id_user = transaksi.id_user "
-                  + "WHERE transaksi.tgl_kembali IS NULL "
-                  + "AND transaksi.id_user = "+id_user);
+                rs = st.executeQuery("SELECT "
+                      + "transaksi.id_trans, buku.namabuku, transaksi.qty, transaksi.tgl_pinjam, transaksi.tgl_tenggat "
+                      + "FROM transaksi "
+                      + "JOIN buku ON buku.id_buku = transaksi.id_buku "
+                      + "JOIN user ON user.id_user = transaksi.id_user "
+                      + "WHERE transaksi.tgl_kembali IS NULL AND status IS NULL "
+                      + "AND transaksi.id_user = "+id_user);
           while (rs.next()) {
             Object[] data = {
               rs.getString("id_trans"),
@@ -1278,6 +1270,10 @@ public final class Main extends javax.swing.JFrame {
             long selisihHari = TimeUnit.DAYS.convert(selisihMillis, TimeUnit.MILLISECONDS);
             if (selisihHari >= -2 && selisihHari <= 0) {
                 try {
+                    String sql = "UPDATE transaksi SET status='proses' WHERE id_trans ="+tf_transaksidipilih1.getText();
+                    ps = conn.prepareStatement(sql);
+                    ps.executeUpdate();
+                    //
                     String query = "INSERT INTO perpanjangan(id_trans,tgl_perpanjangan,tgl_tenggat_lama) "
                             + "VALUES(?,?,?)";
                     ps = conn.prepareStatement(query);
